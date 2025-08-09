@@ -11,11 +11,11 @@ export default function Footer() {
           <h1 className="font-bold text-4xl">ijekerTech</h1>
           <p className="text-gray-600">We craft high-performance digital experienced that drive real bussiness result.</p>
           <div className="flex gap-8 text-2xl mt-2 ">
-            <Link to="/github"><FaGithub className='text-green-500 font-bold' /></Link>
-            <Link to="/facebook"><FaFacebook className='text-green-500 font-bold' /></Link>
-            <Link to="/linkedin"><FaLinkedinIn className='text-green-500 font-bold' /></Link>
-            <Link to="/instagram"><FaInstagram className='text-green-500 font-bold' /></Link>
-            <Link to="/twitter"><FaXTwitter className='text-green-500 font-bold' /></Link>
+            <Link to="https://github.com/ijekertech"><FaGithub className='text-green-500 font-bold' /></Link>
+            <Link to="https://www.facebook.com/profile.php?id=61579048111215"><FaFacebook className='text-green-500 font-bold' /></Link>
+            <Link to="https://www.linkedin.com/company/ijekertech"><FaLinkedinIn className='text-green-500 font-bold' /></Link>
+            <Link to="https://instagram.com/ijekertech"><FaInstagram className='text-green-500 font-bold' /></Link>
+            <Link to="https://twitter.com/ijekertech"><FaXTwitter className='text-green-500 font-bold' /></Link>
           </div>
           <hr className='mt-4' />
         </div>
