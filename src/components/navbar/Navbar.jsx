@@ -13,9 +13,9 @@ const Navbar = () => {
     {
       label: "Company",
       dropdown: [
-        { label: "About Us", to: "/about" },
-        { label: "Our Team", to: "/team" },
-        { label: "Careers", to: "/careers" },
+        { label: "About Us", to: "/company/about" },
+        { label: "Our Team", to: "/company/our-team" },
+        { label: "Careers", to: "/company/careers" },
       ],
     },
     {
@@ -29,9 +29,8 @@ const Navbar = () => {
     {
       label: "Pages",
       dropdown: [
-        { label: "FAQ", to: "/faq" },
-        { label: "Pricing", to: "/pricing" },
-        { label: "Testimonials", to: "/testimonials" },
+        { label: "FAQ", to: "/pages/faq" },
+        { label: "Testimonials", to: "/pages/testimonials" },
       ],
     },
     {
@@ -55,10 +54,10 @@ const Navbar = () => {
     <>
       {/* Alert Banner */}
       <div className="bg-yellow-500 text-black text-center py-2 text-sm font-semibold">
-        🚧 This website is under process. Some features may not work yet.
+        🚧 This website is under process. Some features may not work yet.🚧
+        
       </div>
-
-
+    
       {/* end Navbar banner */}
 
       <div className="sticky top-0 z-50 shadow-md bg-white border-b">

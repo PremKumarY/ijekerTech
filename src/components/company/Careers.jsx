@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Career() {
+function Careers() {
   return (
     <div>
       <h2>Join Our Team</h2>
@@ -9,4 +9,4 @@ function Career() {
   )
 }
 
-export default Career
+export default Careers;
