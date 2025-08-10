@@ -21,9 +21,9 @@ const Navbar = () => {
     {
       label: "IT Solutions",
       dropdown: [
-        { label: "Web Development", to: "/services/WebDevelopment" },
-        { label: "App Development", to: "/services/AppDevelopment" },
-        { label: "AI Solutions", to: "/services/AISolutions" },
+        { label: "Web Development", to: "/itSolutions/WebDevelopment" },
+        { label: "App Development", to: "/itSolutions/AppDevelopment" },
+        { label: "AI Solutions", to: "/itSolutions/AISolutions" },
       ],
     },
     {

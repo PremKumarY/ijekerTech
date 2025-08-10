@@ -10,6 +10,7 @@ import {
   FaLinkedinIn,
   FaPinterestP,
 } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 function NavbarBanner() {
   return (
@@ -52,7 +53,7 @@ function NavbarBanner() {
 
         {/* Social Icons */}
         <div className="flex items-center gap-2 mt-2 lg:mt-0">
-          <a href="https://www.facebook.com/profile.php?id=61579048111215" className="p-2 rounded bg-blue-100 text-blue-800 hover:opacity-80"><FaFacebookF /></a>
+          <a href="https://facebook.com/profile.php?id=61579048111215" className="p-2 rounded bg-blue-100 text-blue-800 hover:opacity-80"><FaFacebookF /></a>
           <a href="https://x.com/ijekertech" className="p-2 rounded bg-blue-200 text-blue-700 hover:opacity-80"><FaTwitter /></a>
           <a href="https://instagram.com/ijekertech" className="p-2 rounded bg-pink-100 text-pink-600 hover:opacity-80"><FaInstagram /></a>
           <a href="https://linkedin.com/company/ijekertech" className="p-2 rounded bg-blue-100 text-blue-900 hover:opacity-80"><FaLinkedinIn /></a>

@@ -4,6 +4,7 @@ function AISolutions() {
   return (
     <div>
       <h1>AI Solutions</h1>
+      <h2>Transforming Businesses with AI</h2>
       <p>We offer cutting-edge AI solutions to help businesses automate processes and gain insights from their data.</p>  
     </div>
   )
