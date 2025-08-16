@@ -107,7 +107,7 @@ function CmsPage() {
           to="/register"
           className="mt-4 inline-block bg-yellow-400 text-gray-900 font-bold px-6 py-3 rounded-full shadow hover:bg-yellow-300 transition"
         >
-          Get Started
+          Get Started..
         </Link>
       </div>
     </div>
