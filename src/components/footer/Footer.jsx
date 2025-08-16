@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
   return (
-    <section className='pt-16 m-11'>
+    <>
+    <section className='  bg-blue-50'>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 
-        <div className="p-4 md:p-12">
+        <div className=" md:p-12">
           <h1 className="font-bold text-4xl">ijekerTech</h1>
           <p className="text-gray-600">We craft high-performance digital experienced that drive real bussiness result.</p>
           <div className="flex gap-8 text-2xl mt-2 ">
@@ -43,8 +44,12 @@ export default function Footer() {
 
       </div>
       <hr />
-      <div className="text-center text-gray-500 p-4 ">Copyright © 2025 ijekerTech All rights reserved </div>
-      <hr />
+     
     </section>
+     <footer className="bg-gray-900 text-gray-400 text-center py-4">
+        © {new Date().getFullYear()} ijekerTech. All rights reserved.
+      </footer>
+      </>
+
   )
 }

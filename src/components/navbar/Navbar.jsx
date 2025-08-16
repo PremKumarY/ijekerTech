@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import { HiChevronDown } from "react-icons/hi2";
 
+import { FaUser } from "react-icons/fa";
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -36,10 +37,11 @@ const Navbar = () => {
     {
       label: "Blogs",
       dropdown: [
-        { label: "Blog List", to: "/blog" },
-        { label: "Blog Details", to: "/blog/details" },
+        { label: "Blog List", to: "blog/BlogPage" },
+        // { label: "Blog Details", to: "blog/BlogDetailsPage" },
       ],
     },
+
   ];
 
   const toggleDropdown = (label) => {
@@ -50,14 +52,17 @@ const Navbar = () => {
     setOpenDesktopDropdown(openDesktopDropdown === label ? null : label);
   };
 
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // yaha aap auth check karoge
+  const [username] = useState("Prem Kumar"); // backend se aayega
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   return (
     <>
       {/* Alert Banner */}
       <div className="bg-yellow-500 text-black text-center py-2 text-sm font-semibold">
         🚧 This website is under process. Some features may not work yet.🚧
-        
+
       </div>
-    
+
       {/* end Navbar banner */}
 
       <div className="sticky top-0 z-50 shadow-md bg-white border-b">
@@ -117,8 +122,8 @@ const Navbar = () => {
                 {dropdown.length > 0 && (
                   <ul
                     className={`absolute left-0 top-full mt-2 bg-white text-black shadow-lg rounded-md min-w-[180px] overflow-hidden transition-all duration-300 ease-in-out ${openDesktopDropdown === label
-                        ? "max-h-96 opacity-100 scale-100"
-                        : "max-h-0 opacity-0 scale-95"
+                      ? "max-h-96 opacity-100 scale-100"
+                      : "max-h-0 opacity-0 scale-95"
                       }`}
                   >
                     {dropdown.map((item) => (
@@ -142,17 +147,72 @@ const Navbar = () => {
                 Contact
               </Link>
             </div>
+            <div>
+              <Link to="/cms/cms-page" disabled className="hover:text-blue-600 transition-colors cursor-not-allowed">
+                CMS
+              </Link>
+            </div>
           </nav>
+              
+          {/* Account */}
+          {/* Account */}
+          <div className="relative ">
+            {isLoggedIn ? (
+              <div className="relative">
+                <button
+                  onClick={() => setDropdownOpen(!dropdownOpen)} // click for both desktop & mobile
+                 disabled className="flex items-center gap-2 border rounded-md px-4 py-2 bg-white hover:bg-gray-100 cursor-not-allowed"
+                  
+ 
+                >
+                  <FaUser className="text-[#0F0D3D]" />
+                  <span className="text-sm text-gray-700">{username}</span>
+                  <HiChevronDown
+                    className={`ml-1 transform transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""
+                      }`}
+                  />
+                </button>
 
-          {/* Search Box */}
-          <div className="hidden sm:block relative">
-            <input
-              type="text"
-              placeholder="Search"
-              className="border rounded-md px-4 py-2 pr-10 text-sm text-gray-600 focus:outline-none"
-            />
-            <FaSearch className="absolute top-1/2 right-3 transform -translate-y-1/2 text-[#0F0D3D] text-sm" />
+                {/* Dropdown Menu */}
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
+                    <ul className="py-2 text-sm text-gray-700">
+                      <Link
+                        to="cms/account/profile"
+                        className="block"
+                        onClick={() => setDropdownOpen(false)} // close after selection
+                      >
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          Profile
+                        </li>
+                      </Link>
+                      <li
+                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-500"
+                        onClick={() => {
+                          setIsLoggedIn(false);
+                          setDropdownOpen(false); // close after logout
+                        }}
+                      >
+                        Logout
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex gap-2">
+                <button className="border rounded-md px-4 py-2 text-sm bg-white hover:bg-gray-100">
+                  Login
+                </button>
+                <button className="border rounded-md px-4 py-2 text-sm bg-blue-600 text-white hover:bg-blue-700">
+                  SignUp
+                </button>
+              </div>
+                    )}
           </div>
+
+
+          {/* Account sec Close */}
 
           {/* Mobile Hamburger */}
           <button
@@ -219,6 +279,15 @@ const Navbar = () => {
                   onClick={() => setMobileMenuOpen(false)} // ✅ Close on contact click
                 >
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/cms/cms-page"
+                  className="block px-6 py-3 hover:bg-gray-100"
+                  onClick={() => setMobileMenuOpen(false)} // ✅ Close on contact click
+                >
+                  CMS
                 </Link>
               </li>
             </ul>
