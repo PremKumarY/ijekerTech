@@ -148,22 +148,22 @@ const Navbar = () => {
               </Link>
             </div>
             <div>
-              <Link to="/cms/cms-page" disabled className="hover:text-blue-600 transition-colors cursor-not-allowed">
+              <Link to="/cms/cms-page"  className="hover:text-blue-600 transition-colors ">
                 CMS
               </Link>
             </div>
           </nav>
-              
+
           {/* Account */}
           {/* Account */}
-          <div className="relative ">
+          <div className="relative hidden lg:flex items-center gap-4">
             {isLoggedIn ? (
               <div className="relative">
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)} // click for both desktop & mobile
-                 disabled className="flex items-center gap-2 border rounded-md px-4 py-2 bg-white hover:bg-gray-100 cursor-not-allowed"
-                  
- 
+                   className="flex items-center gap-2 border rounded-md px-4 py-2 bg-white hover:bg-gray-100 "
+
+
                 >
                   <FaUser className="text-[#0F0D3D]" />
                   <span className="text-sm text-gray-700">{username}</span>
@@ -208,7 +208,7 @@ const Navbar = () => {
                   SignUp
                 </button>
               </div>
-                    )}
+            )}
           </div>
 
 
@@ -291,7 +291,63 @@ const Navbar = () => {
                 </Link>
               </li>
             </ul>
+            {/* Account */}
+            <div className="relative ">
+              {isLoggedIn ? (
+                <div className="relative">
+                  <button
+                    onClick={() => setDropdownOpen(!dropdownOpen)} // click for both desktop & mobile
+                     className="flex items-center gap-2 border rounded-md px-4 py-2 bg-white hover:bg-gray-100 "
+
+
+                  >
+                    <FaUser className="text-[#0F0D3D]" />
+                    <span className="text-sm text-gray-700">{username}</span>
+                    <HiChevronDown
+                      className={`ml-1 transform transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""
+                        }`}
+                    />
+                  </button>
+
+                  {/* Dropdown Menu */}
+                  {dropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
+                      <ul className="py-2 text-sm text-gray-700">
+                        <Link
+                          to="cms/account/profile"
+                          className="block"
+                          onClick={() => setDropdownOpen(false)} // close after selection
+                        >
+                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                            Profile
+                          </li>
+                        </Link>
+                        <li
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-500"
+                          onClick={() => {
+                            setIsLoggedIn(false);
+                            setDropdownOpen(false); // close after logout
+                          }}
+                        >
+                          Logout
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="flex gap-2">
+                  <button className="border rounded-md px-4 py-2 text-sm bg-white hover:bg-gray-100">
+                    Login
+                  </button>
+                  <button className="border rounded-md px-4 py-2 text-sm bg-blue-600 text-white hover:bg-blue-700">
+                    SignUp
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
+
         )}
       </div>
     </>
