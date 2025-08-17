@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import FooterBanner from "../footer/FooterBanner";
 
+
 // Animation Variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
