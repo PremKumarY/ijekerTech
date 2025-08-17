@@ -102,6 +102,7 @@ function CmsPage() {
         <h3 className="text-2xl font-semibold">Ready to Start Your Journey?</h3>
         <p className="mt-2 text-gray-200">
           Join ijekerTech today and build your future with us.
+          Discover a world of opportunities at your fingertips.
         </p>
         <Link
           to="/register"
