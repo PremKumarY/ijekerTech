@@ -1,13 +1,22 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FaSearch, FaBars, FaTimes, FaUser } from "react-icons/fa";
 import { HiChevronDown } from "react-icons/hi2";
 
-import { FaUser } from "react-icons/fa";
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openDesktopDropdown, setOpenDesktopDropdown] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [username] = useState("Prem Kumar");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const location = useLocation();
+
+  // ✅ Scroll to top whenever route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   const menuItems = [
     { label: "Home", to: "/", dropdown: [] },
@@ -36,12 +45,8 @@ const Navbar = () => {
     },
     {
       label: "Blogs",
-      dropdown: [
-        { label: "Blog List", to: "blog/BlogPage" },
-        // { label: "Blog Details", to: "blog/BlogDetailsPage" },
-      ],
+      dropdown: [{ label: "Blog List", to: "blog/BlogPage" }],
     },
-
   ];
 
   const toggleDropdown = (label) => {
@@ -52,18 +57,12 @@ const Navbar = () => {
     setOpenDesktopDropdown(openDesktopDropdown === label ? null : label);
   };
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // yaha aap auth check karoge
-  const [username] = useState("Prem Kumar"); // backend se aayega
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   return (
     <>
       {/* Alert Banner */}
       <div className="bg-yellow-500 text-black text-center py-2 text-sm font-semibold">
         🚧 This website is under process. Some features may not work yet.🚧
-
       </div>
-
-      {/* end Navbar banner */}
 
       <div className="sticky top-0 z-50 shadow-md bg-white border-b">
         <div className="flex items-center justify-between px-6 py-4">
@@ -79,8 +78,12 @@ const Navbar = () => {
               <div
                 key={label}
                 className="relative cursor-pointer"
-                onMouseEnter={() => dropdown.length > 0 && setOpenDesktopDropdown(label)}
-                onMouseLeave={() => dropdown.length > 0 && setOpenDesktopDropdown(null)}
+                onMouseEnter={() =>
+                  dropdown.length > 0 && setOpenDesktopDropdown(label)
+                }
+                onMouseLeave={() =>
+                  dropdown.length > 0 && setOpenDesktopDropdown(null)
+                }
               >
                 {to ? (
                   <Link
@@ -98,7 +101,9 @@ const Navbar = () => {
                         style={{ cursor: "pointer" }}
                       >
                         <HiChevronDown
-                          className={`${openDesktopDropdown === label ? "rotate-180" : ""}`}
+                          className={`${
+                            openDesktopDropdown === label ? "rotate-180" : ""
+                          }`}
                         />
                       </span>
                     )}
@@ -111,8 +116,9 @@ const Navbar = () => {
                     {label}
                     {dropdown.length > 0 && (
                       <HiChevronDown
-                        className={`ml-1 transform transition-transform duration-300 ${openDesktopDropdown === label ? "rotate-180" : ""
-                          }`}
+                        className={`ml-1 transform transition-transform duration-300 ${
+                          openDesktopDropdown === label ? "rotate-180" : ""
+                        }`}
                       />
                     )}
                   </div>
@@ -121,10 +127,11 @@ const Navbar = () => {
                 {/* Smooth Dropdown */}
                 {dropdown.length > 0 && (
                   <ul
-                    className={`absolute left-0 top-full mt-2 bg-white text-black shadow-lg rounded-md min-w-[180px] overflow-hidden transition-all duration-300 ease-in-out ${openDesktopDropdown === label
-                      ? "max-h-96 opacity-100 scale-100"
-                      : "max-h-0 opacity-0 scale-95"
-                      }`}
+                    className={`absolute left-0 top-full mt-2 bg-white text-black shadow-lg rounded-md min-w-[180px] overflow-hidden transition-all duration-300 ease-in-out ${
+                      openDesktopDropdown === label
+                        ? "max-h-96 opacity-100 scale-100"
+                        : "max-h-0 opacity-0 scale-95"
+                    }`}
                   >
                     {dropdown.map((item) => (
                       <li key={item.label}>
@@ -143,44 +150,47 @@ const Navbar = () => {
 
             {/* Contact */}
             <div>
-              <Link to="/contact" className="hover:text-blue-600 transition-colors">
+              <Link
+                to="/contact"
+                className="hover:text-blue-600 transition-colors"
+              >
                 Contact
               </Link>
             </div>
             <div>
-              <Link to="/cms/cms-page"  className="hover:text-blue-600 transition-colors ">
+              <Link
+                to="/cms/cms-page"
+                className="hover:text-blue-600 transition-colors "
+              >
                 CMS
               </Link>
             </div>
           </nav>
 
-          {/* Account */}
-          {/* Account */}
+          {/* Account Desktop */}
           <div className="relative hidden lg:flex items-center gap-4">
             {isLoggedIn ? (
               <div className="relative">
                 <button
-                  onClick={() => setDropdownOpen(!dropdownOpen)} // click for both desktop & mobile
-                   className="flex items-center gap-2 border rounded-md px-4 py-2 bg-white hover:bg-gray-100 "
-
-
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="flex items-center gap-2 border rounded-md px-4 py-2 bg-white hover:bg-gray-100 "
                 >
                   <FaUser className="text-[#0F0D3D]" />
                   <span className="text-sm text-gray-700">{username}</span>
                   <HiChevronDown
-                    className={`ml-1 transform transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""
-                      }`}
+                    className={`ml-1 transform transition-transform duration-300 ${
+                      dropdownOpen ? "rotate-180" : ""
+                    }`}
                   />
                 </button>
 
-                {/* Dropdown Menu */}
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
                     <ul className="py-2 text-sm text-gray-700">
                       <Link
                         to="cms/account/profile"
                         className="block"
-                        onClick={() => setDropdownOpen(false)} // close after selection
+                        onClick={() => setDropdownOpen(false)}
                       >
                         <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                           Profile
@@ -190,7 +200,7 @@ const Navbar = () => {
                         className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-500"
                         onClick={() => {
                           setIsLoggedIn(false);
-                          setDropdownOpen(false); // close after logout
+                          setDropdownOpen(false);
                         }}
                       >
                         Logout
@@ -211,9 +221,6 @@ const Navbar = () => {
             )}
           </div>
 
-
-          {/* Account sec Close */}
-
           {/* Mobile Hamburger */}
           <button
             className="lg:hidden text-2xl text-[#0F0D3D]"
@@ -233,7 +240,7 @@ const Navbar = () => {
                     <Link
                       to={to}
                       className="flex justify-between items-center px-6 py-3 hover:bg-gray-100"
-                      onClick={() => setMobileMenuOpen(false)} // ✅ Close menu on click
+                      onClick={() => setMobileMenuOpen(false)}
                     >
                       {label}
                     </Link>
@@ -245,14 +252,14 @@ const Navbar = () => {
                       {label}
                       {dropdown.length > 0 && (
                         <HiChevronDown
-                          className={`transform transition-transform ${openDropdown === label ? "rotate-180" : ""
-                            }`}
+                          className={`transform transition-transform ${
+                            openDropdown === label ? "rotate-180" : ""
+                          }`}
                         />
                       )}
                     </button>
                   )}
 
-                  {/* Mobile Dropdown */}
                   {openDropdown === label && dropdown.length > 0 && (
                     <ul className="bg-gray-50">
                       {dropdown.map((item) => (
@@ -260,7 +267,7 @@ const Navbar = () => {
                           <Link
                             to={item.to}
                             className="block px-8 py-2 hover:bg-gray-200"
-                            onClick={() => setMobileMenuOpen(false)} // ✅ Close on dropdown link click
+                            onClick={() => setMobileMenuOpen(false)}
                           >
                             {item.label}
                           </Link>
@@ -276,7 +283,7 @@ const Navbar = () => {
                 <Link
                   to="/contact"
                   className="block px-6 py-3 hover:bg-gray-100"
-                  onClick={() => setMobileMenuOpen(false)} // ✅ Close on contact click
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   Contact
                 </Link>
@@ -285,38 +292,40 @@ const Navbar = () => {
                 <Link
                   to="/cms/cms-page"
                   className="block px-6 py-3 hover:bg-gray-100"
-                  onClick={() => setMobileMenuOpen(false)} // ✅ Close on contact click
+                  onClick={() => setMobileMenuOpen(false)}
                 >
                   CMS
                 </Link>
               </li>
             </ul>
-            {/* Account */}
+
+            {/* Mobile Account Section */}
             <div className="relative ">
               {isLoggedIn ? (
                 <div className="relative">
                   <button
-                    onClick={() => setDropdownOpen(!dropdownOpen)} // click for both desktop & mobile
-                     className="flex items-center gap-2 border rounded-md px-4 py-2 bg-white hover:bg-gray-100 "
-
-
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className="flex items-center gap-2 border rounded-md px-4 py-2 bg-white hover:bg-gray-100 "
                   >
                     <FaUser className="text-[#0F0D3D]" />
                     <span className="text-sm text-gray-700">{username}</span>
                     <HiChevronDown
-                      className={`ml-1 transform transition-transform duration-300 ${dropdownOpen ? "rotate-180" : ""
-                        }`}
+                      className={`ml-1 transform transition-transform duration-300 ${
+                        dropdownOpen ? "rotate-180" : ""
+                      }`}
                     />
                   </button>
 
-                  {/* Dropdown Menu */}
                   {dropdownOpen && (
                     <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
                       <ul className="py-2 text-sm text-gray-700">
                         <Link
                           to="cms/account/profile"
                           className="block"
-                          onClick={() => setDropdownOpen(false)} // close after selection
+                          onClick={() => {
+                            setDropdownOpen(false);
+                            setMobileMenuOpen(false);
+                          }}
                         >
                           <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
                             Profile
@@ -326,7 +335,8 @@ const Navbar = () => {
                           className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-500"
                           onClick={() => {
                             setIsLoggedIn(false);
-                            setDropdownOpen(false); // close after logout
+                            setDropdownOpen(false);
+                            setMobileMenuOpen(false);
                           }}
                         >
                           Logout
@@ -347,7 +357,6 @@ const Navbar = () => {
               )}
             </div>
           </div>
-
         )}
       </div>
     </>

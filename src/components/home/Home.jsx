@@ -143,14 +143,12 @@ const Home = () => {
     <>
       {/* ---------------------- Hero Section ---------------------- */}
       <div className="relative w-full h-[75vh] overflow-hidden">
-        {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center transition-all duration-1000 z-0"
           style={{ backgroundImage: `url(${slides[current].image})` }}
         />
-        <div className="absolute inset-0 bg-black/60 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-black/60 z-5" />
 
-        {/* Animated Content */}
         <AnimatePresence mode="wait">
           <motion.div
             key={slides[current].id}
@@ -161,34 +159,51 @@ const Home = () => {
             className="absolute z-20 w-full h-full flex items-center px-6 md:px-24"
           >
             <div className="max-w-2xl text-white">
-              <p className="text-blue-400 uppercase tracking-widest border-b-2 border-blue-400 inline-block font-medium">
+              <motion.p
+                className="text-blue-400 uppercase tracking-widest border-b-2 border-blue-400 inline-block font-medium"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
                 Best IT Solution Provider and Consultancy
-                
-              </p>
-              <h1 className="text-4xl md:text-6xl font-bold mt-4 mb-6 leading-tight">
+              </motion.p>
+              <motion.h1
+                className="text-4xl md:text-6xl font-bold mt-4 mb-6 leading-tight"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+              >
                 {slides[current].title}
-              </h1>
-              <p className="text-lg md:text-xl mb-6 opacity-90">
+              </motion.h1>
+              <motion.p
+                className="text-lg md:text-xl mb-6 opacity-90"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+              >
                 {slides[current].description}
-              </p>
-              <button className="group flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition">
+              </motion.p>
+              <motion.button
+                className="group flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition"
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+              >
                 {slides[current].buttonText}
                 <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 transition" />
-              </button>
+              </motion.button>
             </div>
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation Dots */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-30">
           {slides.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`w-3 h-3 rounded-full transition-all ${i === current
-                ? "bg-white scale-125"
-                : "bg-gray-400 hover:bg-white"
-                }`}
+              className={`w-3 h-3 rounded-full transition-all ${
+                i === current ? "bg-white scale-125" : "bg-gray-400 hover:bg-white"
+              }`}
             />
           ))}
         </div>
@@ -210,8 +225,7 @@ const Home = () => {
               We Promise High Quality IT Solutions
             </h2>
             <p className="text-gray-500 text-xl mt-4">
-              Over <span className="text-blue-600 font-semibold">2,500+</span>{" "}
-              Customers
+              Over <span className="text-blue-600 font-semibold">2,500+</span> Customers
             </p>
             <div className="w-20 h-[2px] bg-blue-600 mt-4"></div>
             <p className="text-gray-600 mt-6 leading-relaxed">
@@ -227,14 +241,13 @@ const Home = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={scaleIn}
-
           >
             <img src="/img3.jpg" alt="Team" className="w-full h-full object-cover" />
             <motion.div
               className="absolute bottom-6 left-6 bg-blue-600 text-white px-6 py-4 rounded-lg shadow-lg flex items-center"
               animate={{
-                y: [0, -10, 0, 10, 0], // up & down
-                x: [0, 5, 0, -5, 0],   // left & right
+                y: [0, -10, 0, 10, 0],
+                x: [0, 5, 0, -5, 0],
               }}
               transition={{
                 duration: 6,
@@ -247,7 +260,6 @@ const Home = () => {
                 Year’s Experience in IT
               </div>
             </motion.div>
-
           </motion.div>
         </div>
       </section>
@@ -288,16 +300,14 @@ const Home = () => {
             {services.map((service, idx) => (
               <motion.div
                 key={idx}
-                whileHover={{ y: -10, scale: 1.02 }}
+                whileHover={{ y: -10, scale: 1.05, rotate: [0, 2, -2, 0] }}
                 className="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 text-center border border-gray-200"
               >
-                <div className="flex justify-center mb-4">{service.icon}</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {service.desc}
-                </p>
+                <div className="flex justify-center mb-4 bg-gradient-to-tr from-blue-100 to-blue-50 rounded-full p-4">
+                  {service.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">{service.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{service.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -324,21 +334,18 @@ const Home = () => {
             {team.map((member, index) => (
               <motion.div
                 key={index}
-                initial="hidden"
-                whileInView="visible"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                variants={fadeInUp}
-                whileHover={{ y: -8, scale: 1.03 }}
-                className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-xl transition p-6 text-center"
+                whileHover={{ y: -8, scale: 1.03, boxShadow: "0 15px 35px rgba(0,0,0,0.15)" }}
+                className="bg-white border border-gray-200 rounded-lg shadow-md transition p-6 text-center"
               >
                 <img
                   src={member.image}
                   alt={member.name}
                   className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-blue-500 object-cover"
                 />
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {member.name}
-                </h3>
+                <h3 className="text-lg font-semibold text-gray-800">{member.name}</h3>
                 <p className="text-sm text-blue-600">{member.role}</p>
                 <p className="mt-3 text-gray-600 text-sm">{member.bio}</p>
               </motion.div>
@@ -363,11 +370,11 @@ const Home = () => {
             Have questions or want to work with us? Contact our team today.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <button className="flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-              <Users className="w-5 h-5" /> Contact Sales
+            <button className="flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition transform hover:-translate-y-1">
+              <Users className="w-5 h-5 transition-transform group-hover:scale-110" /> Contact Sales
             </button>
-            <button className="flex items-center gap-2 bg-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition">
-              <Phone className="w-5 h-5" /> Call Us Now
+            <button className="flex items-center gap-2 bg-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition transform hover:-translate-y-1">
+              <Phone className="w-5 h-5 transition-transform group-hover:scale-110" /> Call Us Now
             </button>
           </div>
         </div>
