@@ -4,8 +4,8 @@ import Layout from './components/home/Layout'
 import Contact from './components/contact/Contact'
 import NoPage from './components/nopage/NoPage'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import WebDevelopment from './components/itsolutions/WebDevelopment'
-import AppDevelopment from './components/itsolutions/AppDevelopment'
+import WebDevelopment from './components/IT/WebDevelopment'
+import AppDevelopment from './components/IT/AppDevelopment'
 
 import BlogDetails from './components/blog/BlogDetailsPage'
 import BlogList from './components/blog/BlogPage'
@@ -23,8 +23,8 @@ import InternshipPage from './components/cms/InternshipPage'
 import Profile from './components/cms/account/Profile'
 import Settings from './components/cms/account/Settings'
 import Dashboard from './components/cms/account/Dashboard'
-import ServiceDetails from './components/itsolutions/ServiceDetails'
-import AISolutions from './components/itSolutions/AISolutions'
+import ServiceDetails from './components/IT/ServiceDetails'
+import AISolutions from './components/IT/AISolutions'
 
 function App() {
   return (
