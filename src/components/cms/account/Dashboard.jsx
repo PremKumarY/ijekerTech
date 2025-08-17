@@ -60,7 +60,7 @@ function Dashboard() {
                 alt="Profile"
                 className="w-8 h-8 rounded-full"
               />
-              <span className="hidden md:block">Prem</span>
+              <span className="hidden md:block">Sudent</span>
             </button>
           </div>
         </header>

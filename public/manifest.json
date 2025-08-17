@@ -1,0 +1,31 @@
+{
+  "name": "IjekerTech - AI & Web Solutions",
+  "short_name": "IjekerTech",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "description": "IjekerTech is an AI & Web Development company providing solutions in AI, Web Apps, SaaS, and Business Automation.",
+  "icons": [
+    {
+      "src": "/favicon-16X16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-512X512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32X32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-192X192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
