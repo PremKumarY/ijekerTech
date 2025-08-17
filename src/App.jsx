@@ -6,8 +6,9 @@ import NoPage from './components/nopage/NoPage'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import WebDevelopment from './components/itsolutions/WebDevelopment'
 import AppDevelopment from './components/itsolutions/AppDevelopment'
-
-import BlogDetails from './components/blog/BlogDetailsPage'
+import AISolutions from './components/itsolutions/AISolutions'
+import AllServices from './components/itsolutions/AllServices'
+import BlogDetails from './components/blog/BlogDetailsPage' 
 import BlogList from './components/blog/BlogPage'
 import Home from './components/home/Home'
 import AboutUs from './components/company/AboutUs'
@@ -24,13 +25,11 @@ import Profile from './components/cms/account/Profile'
 import Settings from './components/cms/account/Settings'
 import Dashboard from './components/cms/account/Dashboard'
 
-import AISolutions from './components/itsolutions/AISolutions'
-import ServiceDetails from './components/itSolutions/ServiceDetails'
+
 
 function App() {
   return (
     <>
- 
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -40,6 +39,8 @@ function App() {
             <Route path="itsolutions/WebDevelopment" element={<WebDevelopment />} />
             <Route path="itsolutions/AppDevelopment" element={<AppDevelopment />} />
             <Route path="itsolutions/AISolutions" element={<AISolutions />} />
+            <Route path="itsolutions/AllServices" element={<AllServices />} />
+
             <Route path="blog/BlogDetailsPage/:id" element={<BlogDetails />} />
             <Route path="contact" element={<Contact />} />
             <Route path="company/about" element={<AboutUs />} />
@@ -53,7 +54,6 @@ function App() {
             <Route path="apply-internship" element={<InternshipPage />} />
             <Route path="cms/account/settings" element={<Settings />} />
             <Route path="cms/account/profile" element={<Profile />} />
-            <Route path="itsolutions/ServiceDetails" element={<ServiceDetails />} />
             <Route path="cms/account/profile/dashboard" element={<Dashboard />} />
             <Route path="*" element={<NoPage />} />
           </Route>

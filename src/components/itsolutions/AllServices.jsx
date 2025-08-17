@@ -23,7 +23,7 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-export default function ServiceDetails() {
+export default function AllServices() {
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleFAQ = (index) => {
