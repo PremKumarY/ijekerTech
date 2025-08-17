@@ -4,7 +4,8 @@ import { Outlet } from 'react-router-dom'
 
 import NavbarBanner from '../navbar/NavbarBanner'
 import Navbar from '../navbar/Navbar'
-import Footer from '../Footer/Footer'
+import FooterBanner from '../footer/FooterBanner'
+
 
 function Layout() {
   return (
@@ -14,7 +15,7 @@ function Layout() {
       <main className="flex-grow">
         <Outlet />
       </main>
-    <Footer />
+ <FooterBanner/>
     </div>
   )
 }
