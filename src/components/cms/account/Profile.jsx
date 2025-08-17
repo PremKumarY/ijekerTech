@@ -15,10 +15,10 @@ function Profile() {
   const [activePage, setActivePage] = useState("dashboard");
 
   const userDetails = {
-    fullName: "Prem Kumar Yadav",
-    email: "premkumar@example.com",
-    phone: "+91 98765 43210",
-    location: "Kushinagar, Uttar Pradesh, India",
+    fullName: "Sudent",
+    email: "sudent@example.com",
+    phone: "+91 XXXXXXXX47",
+    location: "India",
   };
 
   // New Training Details and Certificates data
