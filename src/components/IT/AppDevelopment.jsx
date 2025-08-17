@@ -1,5 +1,5 @@
 import React from 'react'
-import FooterBanner from '../../footer/FooterBanner'
+import FooterBanner from '../footer/FooterBanner'
 import { FaMobileAlt, FaCode, FaCloud, FaRobot, FaServer, FaDatabase, FaLock } from "react-icons/fa";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
