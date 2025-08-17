@@ -129,7 +129,7 @@ const Home = () => {
   const [current, setCurrent] = useState(0);
   const navigate = useNavigate();
 
-  const handleClick = () => navigate("itSolutions/ServiceDetails");
+  const handleClick = () => navigate("itsolutions/AllServices");
 
   useEffect(() => {
     const timer = setInterval(
