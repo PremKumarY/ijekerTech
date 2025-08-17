@@ -39,7 +39,7 @@ export default function ServiceDetails() {
           variants={fadeInUp}
           className="text-4xl md:text-5xl font-bold"
         >
-          IT Management Services
+          IT Management Services and Consultancy
         </motion.h1>
         <p className="mt-4 text-lg md:text-xl max-w-2xl mx-auto opacity-90">
           Delivering reliable IT solutions with 27+ years of excellence.
