@@ -4,9 +4,9 @@ import Layout from './components/home/Layout'
 import Contact from './components/contact/Contact'
 import NoPage from './components/nopage/NoPage'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import WebDevelopment from './components/navbar/itsolutions/WebDevelopment'
-import AppDevelopment from './components/navbar/itsolutions/AppDevelopment'
-import AISolutions from './components/navbar/itsolutions/AISolutions'
+import WebDevelopment from './components/itsolutions/WebDevelopment'
+import AppDevelopment from './components/itsolutions/AppDevelopment'
+
 import BlogDetails from './components/blog/BlogDetailsPage'
 import BlogList from './components/blog/BlogPage'
 import Home from './components/home/Home'
@@ -23,11 +23,13 @@ import InternshipPage from './components/cms/InternshipPage'
 import Profile from './components/cms/account/Profile'
 import Settings from './components/cms/account/Settings'
 import Dashboard from './components/cms/account/Dashboard'
-import ServiceDetails from './components/navbar/itsolutions/ServiceDetails'
+import ServiceDetails from './components/itsolutions/ServiceDetails'
+import AISolutions from './components/itSolutions/AISolutions'
 
 function App() {
   return (
     <>
+  
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
