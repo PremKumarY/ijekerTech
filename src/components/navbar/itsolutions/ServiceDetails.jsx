@@ -14,7 +14,7 @@ import {
   Wrench,
   ClipboardCheck,
 } from "lucide-react";
-import FooterBanner from "../footer/FooterBanner";
+import FooterBanner from "../../footer/FooterBanner";
 
 // Animation Variants
 const fadeInUp = {

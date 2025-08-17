@@ -1,5 +1,5 @@
 import React from 'react'
-import FooterBanner from '../footer/FooterBanner'
+import FooterBanner from '../../footer/FooterBanner'
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
