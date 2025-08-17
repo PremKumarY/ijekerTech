@@ -40,6 +40,11 @@ function AppDevelopment() {
       icon: <FaLock className="text-4xl text-gray-500" />,
       title: "App Security & Optimization",
       description: "Ensure app security, performance optimization, and regular updates."
+    },
+    {
+      icon: <FaRobot className="text-4xl text-pink-500" />,
+      title: "AI-Powered Applications",
+      description: "Leverage AI/ML to add features like chatbots, image recognition, and voice assistants."
     }
   ];
 
@@ -88,6 +93,12 @@ function AppDevelopment() {
         <h2 className="text-2xl font-bold mb-4">Have a project in mind?</h2>
         <p className="text-gray-600 mb-6">
           Let's create an app that transforms your ideas into reality.
+        </p>
+        <p className="text-gray-600 mb-6">
+          Our team is ready to assist you at every step of the development process.
+        </p>
+        <p className="text-gray-600 mb-6">
+          From ideation to deployment, we've got you covered.
         </p>
         <a
           href="/contact"
