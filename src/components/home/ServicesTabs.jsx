@@ -9,52 +9,55 @@ import {
 export default function ServicesTabs() {
   const [activeTab, setActiveTab] = useState("choose");
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.15, type: "spring", stiffness: 80 },
+    }),
+  };
+
   const renderContent = () => {
     switch (activeTab) {
       case "choose":
-        return (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-            <Card icon={<FaLaptopCode />} title="Product Design" desc="We design creative and scalable products for your business." />
-            <Card icon={<FaDatabase />} title="Web Development" desc="We build high-performance web apps and websites." />
-            <Card icon={<FaChartLine />} title="Data Analytics" desc="Turning raw data into meaningful insights." />
-            <Card icon={<FaShieldAlt />} title="Cyber Security" desc="Protecting your business from digital threats." />
-          </div>
-        );
+        return [
+          { icon: <FaLaptopCode />, title: "Product Design", desc: "Creative, scalable product designs for your business." },
+          { icon: <FaDatabase />, title: "Web Development", desc: "High-performance web applications and websites." },
+          { icon: <FaChartLine />, title: "Data Analytics", desc: "Transforming raw data into meaningful insights." },
+          { icon: <FaShieldAlt />, title: "Cyber Security", desc: "Advanced security for your digital assets." },
+        ];
       case "tech":
-        return (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
-            <InfoCard icon={<FaLaptopCode />} title="Frontend Tech" desc="React, Vue, Angular for modern UI development." />
-            <InfoCard icon={<FaDatabase />} title="Backend Tech" desc="Node.js, Python, Django, Spring Boot." />
-            <InfoCard icon={<FaProjectDiagram />} title="AI & ML" desc="TensorFlow, PyTorch, NLP, and Computer Vision." />
-            <InfoCard icon={<FaShieldAlt />} title="Cloud & Security" desc="AWS, Azure, GCP, Docker, Kubernetes." />
-          </div>
-        );
+        return [
+          { icon: <FaLaptopCode />, title: "Frontend Tech", desc: "React, Vue, Angular – Modern UI frameworks." },
+          { icon: <FaDatabase />, title: "Backend Tech", desc: "Node.js, Python, Django, Spring Boot." },
+          { icon: <FaProjectDiagram />, title: "AI & ML", desc: "TensorFlow, PyTorch, NLP & Computer Vision." },
+          { icon: <FaShieldAlt />, title: "Cloud & Security", desc: "AWS, Azure, GCP, Docker, Kubernetes." },
+        ];
       case "partners":
-        return (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
-            <InfoCard icon={<FaUsers />} title="Tech Giants" desc="We collaborate with Microsoft, Google, and AWS." />
-            <InfoCard icon={<FaUsers />} title="Startups" desc="Supporting 50+ growing startups worldwide." />
-            <InfoCard icon={<FaUsers />} title="Enterprises" desc="Trusted by global enterprises for IT solutions." />
-          </div>
-        );
+        return [
+          { icon: <FaUsers />, title: "Tech Giants", desc: "Collaborating with Microsoft, Google & AWS." },
+          { icon: <FaUsers />, title: "Startups", desc: "Supporting 50+ growing startups worldwide." },
+          { icon: <FaUsers />, title: "Enterprises", desc: "Trusted by global enterprises for IT solutions." },
+        ];
       case "awards":
-        return (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
-            <InfoCard icon={<FaAward />} title="Best IT Startup" desc="Awarded Best IT Startup 2024 for innovation." />
-            <InfoCard icon={<FaAward />} title="Cyber Security Leader" desc="Recognized for excellence in security solutions." />
-            <InfoCard icon={<FaAward />} title="AI Excellence" desc="Winner of AI Excellence Award 2025." />
-            <InfoCard icon={<FaAward />} title="Global Recognition" desc="Featured in global technology conferences." />
-          </div>
-        );
+        return [
+          { icon: <FaAward />, title: "Best IT Startup", desc: "Awarded Best IT Startup 2024 for innovation." },
+          { icon: <FaAward />, title: "Cyber Security Leader", desc: "Recognized for excellence in security solutions." },
+          { icon: <FaAward />, title: "AI Excellence", desc: "Winner of AI Excellence Award 2025." },
+          { icon: <FaAward />, title: "Global Recognition", desc: "Featured in international tech conferences." },
+        ];
       default:
-        return null;
+        return [];
     }
   };
 
+  const tabContent = renderContent();
+
   return (
     <div className="max-w-6xl mx-auto py-10 px-4">
-      <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">
-        Easy Solutions for all Difficult IT Problems
+      <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 text-gray-800">
+        Easy Solutions for All Difficult IT Problems
       </h2>
 
       {/* Tabs */}
@@ -65,7 +68,7 @@ export default function ServicesTabs() {
         <TabButton active={activeTab === "awards"} icon={<FaAward />} label="Our Awards" onClick={() => setActiveTab("awards")} />
       </div>
 
-      {/* Tab Content with Animation */}
+      {/* Tab Content with Staggered Animations */}
       <div className="min-h-[250px] mt-6">
         <AnimatePresence mode="wait">
           <motion.div
@@ -73,9 +76,21 @@ export default function ServicesTabs() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
           >
-            {renderContent()}
+            {tabContent.map((item, i) => (
+              <motion.div
+                key={i}
+                custom={i}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={cardVariants}
+              >
+                <AnimatedCard icon={item.icon} title={item.title} desc={item.desc} />
+              </motion.div>
+            ))}
           </motion.div>
         </AnimatePresence>
       </div>
@@ -83,13 +98,13 @@ export default function ServicesTabs() {
   );
 }
 
-// Tab Button
+// Tab Button Component
 function TabButton({ active, icon, label, onClick }) {
   return (
     <button
       onClick={onClick}
       className={`flex items-center gap-2 text-base md:text-lg font-medium pb-2 border-b-2 transition 
-        ${active ? "border-blue-500 text-blue-600" : "border-transparent text-gray-600 hover:text-blue-600"}`}
+        ${active ? "border-blue-500 text-blue-600" : "border-transparent text-gray-600 hover:text-blue-600 hover:border-blue-300"}`}
     >
       {icon}
       <span>{label}</span>
@@ -97,27 +112,25 @@ function TabButton({ active, icon, label, onClick }) {
   );
 }
 
-// Card Component
-function Card({ icon, title, desc }) {
+// Animated Card Component
+function AnimatedCard({ icon, title, desc }) {
   return (
-    <div className="p-6 bg-blue-50 rounded-xl shadow hover:shadow-lg transition">
-      <div className="text-3xl text-blue-600 mb-3">{icon}</div>
+    <motion.div
+      className="p-6 bg-gradient-to-r from-blue-50 to-white rounded-xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1"
+      whileHover={{ scale: 1.05 }}
+    >
+      <motion.div
+        className="text-3xl text-blue-600 mb-3"
+        animate={{ rotate: [0, 10, -10, 0] }}
+        transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+      >
+        {icon}
+      </motion.div>
       <h4 className="text-lg font-semibold mb-2">{title}</h4>
-      <p className="text-gray-600">{desc}</p>
-      <a href="#" className="text-blue-600 font-medium mt-3 block">
+      <p className="text-gray-700">{desc}</p>
+      <a href="#" className="text-blue-600 font-medium mt-3 block hover:underline">
         Discover now →
       </a>
-    </div>
-  );
-}
-
-// InfoCard Component
-function InfoCard({ icon, title, desc }) {
-  return (
-    <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-      <div className="text-3xl text-blue-600 mb-3">{icon}</div>
-      <h4 className="text-lg font-semibold mb-2">{title}</h4>
-      <p className="text-gray-600">{desc}</p>
-    </div>
+    </motion.div>
   );
 }

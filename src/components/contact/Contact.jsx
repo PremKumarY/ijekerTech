@@ -1,84 +1,155 @@
-import React from 'react';
+import React, { useRef } from 'react';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
+import { FaLinkedin, FaTwitter, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaArrowDown } from 'react-icons/fa';
 import FooterBanner from '../footer/FooterBanner';
 
 const Contact = () => {
+  const formRef = useRef(null);
+
+  const scrollToForm = () => {
+    if (formRef.current) {
+      formRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const inputFocusClass = "focus:ring-2 focus:ring-blue-500 focus:border-transparent";
+
   return (
     <>
-      {/* Hero Image with Text Overlay */}
+      {/* Hero Section */}
       <div className="relative w-full h-[70vh] overflow-hidden">
-        {/* Background Image */}
         <img
           src="/img3.jpg"
           alt="Hero"
           className="absolute top-0 left-0 w-full h-full object-cover"
         />
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        {/* Text Overlay */}
-        <div className="relative z-10  text-center text-white flex flex-col items-center justify-center h-full">
-          <p className="text-blue-400 uppercase tracking-widest font-medium">
-              Best IT Solution Provider
-            </p>
-            <h1 className="text-4xl md:text-5xl font-bold mt-4 mb-6 leading-tight border-b-4 pb-2 inline-block">
-              Contact Us
-            </h1>
-            <p className="mt-2 text-lg">
-              We look forward to hearing from you!
-            </p>
+        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div className="relative z-10 text-center flex flex-col items-center justify-center h-full px-4">
+          <motion.p
+            className="text-blue-400 uppercase tracking-widest font-medium"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Best IT Solution Provider
+          </motion.p>
+          <motion.h1
+            className="text-4xl md:text-5xl font-extrabold mt-4 mb-6 leading-tight border-b-4 pb-2 inline-block text-white"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Contact Us
+          </motion.h1>
+          <motion.p
+            className="mt-2 text-lg text-gray-200 max-w-xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            We look forward to hearing from you! Let's collaborate and build something amazing.
+          </motion.p>
+          <motion.button
+            onClick={scrollToForm}
+            className="mt-6 flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-blue-700 transition transform hover:scale-105"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <FaArrowDown /> Scroll to Form
+          </motion.button>
         </div>
       </div>
 
       {/* Contact Section */}
-      <section className="min-h-[50vh] w-full bg-gray-100 flex flex-col md:flex-row p-6 md:p-16 gap-8">
+      <section className="min-h-[60vh] w-full bg-gray-50 flex flex-col md:flex-row p-6 md:p-16 gap-10" ref={formRef}>
+        
         {/* Contact Form */}
-        <div className="md:w-1/2 w-full bg-white shadow-lg rounded-xl p-6 md:p-10">
-          <h2 className="text-3xl font-bold mb-6 text-gray-900">Get in Touch</h2>
+        <motion.div
+          className="md:w-1/2 w-full bg-white shadow-xl rounded-2xl p-6 md:p-10"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Get in Touch</h2>
           <form className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
               <input
                 type="text"
                 placeholder="Your Name"
-                className="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition-all duration-300 ${inputFocusClass}`}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
               <input
                 type="email"
                 placeholder="your@email.com"
-                className="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition-all duration-300 ${inputFocusClass}`}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Message</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
               <textarea
-                rows="4"
+                rows="5"
                 placeholder="Your Message"
-                className="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition-all duration-300 ${inputFocusClass}`}
               ></textarea>
             </div>
             <button
               type="submit"
-              className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
+              className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-blue-700 transition transform hover:scale-105"
             >
               Send Message
             </button>
           </form>
-        </div>
+        </motion.div>
 
-        {/* Google Map */}
-        <div className="md:w-1/2 w-full h-[400px] md:h-auto rounded-xl overflow-hidden shadow-lg ">
-          <iframe
-            title="Company Location"
-            className="w-full h-full"
-            loading="lazy"
-            allowFullScreen
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7106.3238948843655!2d83.83771707796076!3d27.056635633029614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399409869f91ab9f%3A0x7f7f136a03425bfe!2sijekerTech!5e0!3m2!1sen!2sin!4v1754737717132!5m2!1sen!2sin"
-          ></iframe>
-        </div>
-        
+        {/* Contact Info & Map */}
+        <motion.div
+          className="md:w-1/2 w-full flex flex-col gap-6"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Contact Info */}
+          <div className="bg-white shadow-xl rounded-2xl p-6 flex flex-col gap-4">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Contact Info</h3>
+            <div className="flex items-center gap-3 text-gray-700">
+              <FaPhoneAlt className="text-blue-600" /> <span>+91 12345 67890</span>
+            </div>
+            <div className="flex items-center gap-3 text-gray-700">
+              <FaEnvelope className="text-blue-600" /> <span>ijekerTech@gmail.com</span>
+            </div>
+            <div className="flex items-center gap-3 text-gray-700">
+              <FaMapMarkerAlt className="text-blue-600" /> <span>Lucknow, India</span>
+            </div>
+            <div className="flex items-center gap-4 mt-3">
+              <a href="https://www.linkedin.com/in/prem-kumar-yadav" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition">
+                <FaLinkedin size={24} />
+              </a>
+              <a href="https://twitter.com/prem_kumar_yadav" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-400 transition">
+                <FaTwitter size={24} />
+              </a>
+            </div>
+          </div>
+
+          {/* Google Map */}
+          <div className="rounded-2xl overflow-hidden shadow-xl h-[300px] md:h-[400px]">
+            <iframe
+              title="Company Location"
+              className="w-full h-full border-0"
+              loading="lazy"
+              allowFullScreen
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7106.3238948843655!2d83.83771707796076!3d27.056635633029614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399409869f91ab9f%3A0x7f7f136a03425bfe!2sijekerTech!5e0!3m2!1sen!2sin!4v1754737717132!5m2!1sen!2sin"
+            ></iframe>
+          </div>
+        </motion.div>
       </section>
+
       <FooterBanner />
     </>
   );

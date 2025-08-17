@@ -1,10 +1,8 @@
 import React from 'react'
-
 import { Outlet } from 'react-router-dom'
-
 import NavbarBanner from '../navbar/NavbarBanner'
 import Navbar from '../navbar/Navbar'
-import FooterBanner from '../footer/FooterBanner'
+import Footer from '../footer/Footer'
 
 
 function Layout() {
@@ -15,7 +13,7 @@ function Layout() {
       <main className="flex-grow">
         <Outlet />
       </main>
- <FooterBanner/>
+      <Footer />
     </div>
   )
 }
