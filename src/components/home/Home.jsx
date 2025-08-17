@@ -162,7 +162,8 @@ const Home = () => {
           >
             <div className="max-w-2xl text-white">
               <p className="text-blue-400 uppercase tracking-widest border-b-2 border-blue-400 inline-block font-medium">
-                Best IT Solution Provider
+                Best IT Solution Provider and Consultancy
+                
               </p>
               <h1 className="text-4xl md:text-6xl font-bold mt-4 mb-6 leading-tight">
                 {slides[current].title}
