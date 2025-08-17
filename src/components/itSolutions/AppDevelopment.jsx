@@ -40,11 +40,6 @@ function AppDevelopment() {
       icon: <FaLock className="text-4xl text-gray-500" />,
       title: "App Security & Optimization",
       description: "Ensure app security, performance optimization, and regular updates."
-    },
-    {
-      icon: <FaRobot className="text-4xl text-pink-500" />,
-      title: "AI-Powered Applications",
-      description: "Leverage AI/ML to add features like chatbots, image recognition, and voice assistants."
     }
   ];
 
