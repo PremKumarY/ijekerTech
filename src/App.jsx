@@ -8,7 +8,7 @@ import WebDevelopment from './components/itsolutions/WebDevelopment'
 import AppDevelopment from './components/itsolutions/AppDevelopment'
 import AISolutions from './components/itsolutions/AISolutions'
 import AllServices from './components/itsolutions/AllServices'
-import BlogDetails from './components/blog/BlogDetailsPage' 
+import BlogDetails from './components/blog/BlogDetailsPage'
 import BlogList from './components/blog/BlogPage'
 import Home from './components/home/Home'
 import AboutUs from './components/company/AboutUs'
@@ -18,12 +18,14 @@ import Faq from './components/pages/Faq'
 import Testimonials from './components/pages/Testimonials'
 import CmsPage from './components/cms/CmsPage'
 import Training from './components/cms/Training'
-import Teaching from './components/cms/Teaching'
+import Teaching from './components/cms/courses/Courses'
 import Internship from './components/cms/Internship'
-import InternshipPage from './components/cms/InternshipPage'
+import InternshipPage from './components/cms/Register'
 import Profile from './components/cms/account/Profile'
 import Settings from './components/cms/account/Settings'
 import Dashboard from './components/cms/account/Dashboard'
+import CoursesLandingPage from './components/cms/courses/CoursesLandingPage'
+import Register from './components/cms/Register'
 
 function App() {
   return (
@@ -46,13 +48,15 @@ function App() {
             <Route path="pages/faq" element={<Faq />} />
             <Route path="cms/cms-page" element={<CmsPage />} />
             <Route path="cms/cms-page/training" element={<Training />} />
-            <Route path="cms/cms-page/teaching" element={<Teaching />} />
+            <Route path="cms/cms-page/courses" element={<Teaching />} />
             <Route path="cms/cms-page/internship" element={<Internship />} />
             <Route path="apply-internship" element={<InternshipPage />} />
             <Route path="cms/account/settings" element={<Settings />} />
             <Route path="cms/account/profile" element={<Profile />} />
             <Route path="cms/account/profile/dashboard" element={<Dashboard />} />
             <Route path="*" element={<NoPage />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="cms/cms-page/courses/courseslandingpage" element={<CoursesLandingPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

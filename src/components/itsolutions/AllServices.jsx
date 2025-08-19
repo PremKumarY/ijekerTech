@@ -15,6 +15,7 @@ import {
   Users,
 } from "lucide-react";
 import FooterBanner from "../footer/FooterBanner";
+import { Link } from "react-router-dom";
 
 // Counter component
 const Counter = ({ end, label }) => {
@@ -81,6 +82,15 @@ export default function AllServices() {
           </motion.button>
         </motion.div>
       </section>
+       {/* Breadcrumb */}
+            <nav className="max-w-6xl mx-auto px-4 py-4 text-sm text-gray-600">
+              <Link to="/" className="hover:text-purple-600 font-medium">
+                Home
+              </Link>{" "}
+              /{" "}
+              <span className="text-gray-500"> All Services /</span>
+            </nav>
+      
 
       {/* ---------- About Section ---------- */}
       <section className="py-20 px-6 md:px-16 grid md:grid-cols-2 gap-12 items-center">

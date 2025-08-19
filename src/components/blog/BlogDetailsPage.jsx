@@ -19,6 +19,18 @@ const BlogDetailsPage = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
+       {/* Breadcrumb */}
+        <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
+          <Link to="/" className="hover:text-purple-600 font-medium">
+            Home
+          </Link>{" "}
+          /{" "}
+          <Link to="/blog/BlogPage" className="hover:text-purple-600 font-medium">
+            Blog
+          </Link>{" "}
+          /{" "}
+          <span className="text-gray-500"> {post.title}</span>
+        </nav>
       <section className="max-w-4xl mx-auto px-6 py-12">
         <img
           src={post.image}

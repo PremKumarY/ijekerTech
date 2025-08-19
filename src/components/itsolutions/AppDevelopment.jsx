@@ -1,6 +1,8 @@
 import React from "react";
 import FooterBanner from "../footer/FooterBanner";
+import {Link} from "react-router-dom";
 import { FaMobileAlt, FaCode, FaCloud, FaRobot, FaServer, FaDatabase, FaLock } from "react-icons/fa";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 function AppDevelopment() {
@@ -46,6 +48,14 @@ function AppDevelopment() {
           transition={{ duration: 1.5, repeat: Infinity, repeatType: "mirror" }}
         />
       </section>
+       {/* Breadcrumb */}
+        <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
+          <Link to="/" className="hover:text-purple-600 font-medium">
+            Home
+          </Link>{" "}
+          /{" "}
+          <span className="text-gray-500"> IT Solution / App Development</span>
+        </nav>
 
       {/* Services Grid */}
       <div className="bg-gray-50 py-20 px-6 lg:px-20">

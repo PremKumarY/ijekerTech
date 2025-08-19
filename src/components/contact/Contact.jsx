@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FaLinkedin, FaTwitter, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaArrowDown } from 'react-icons/fa';
 import FooterBanner from '../footer/FooterBanner';
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -60,6 +61,14 @@ const Contact = () => {
           </motion.button>
         </div>
       </div>
+       {/* Breadcrumb */}
+        <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
+          <Link to="/" className="hover:text-purple-600 font-medium">
+            Home
+          </Link>{" "}
+          /{" "}
+          <span className="text-gray-500"> Contact /</span>
+        </nav>
 
       {/* Contact Section */}
       <section className="min-h-[60vh] w-full bg-gray-50 flex flex-col md:flex-row p-6 md:p-16 gap-10" ref={formRef}>

@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom'
 export default function Footer() {
   return (
     <>
-    <section className='  bg-blue-50'>
+    <section className='  bg-blue-10'>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 
-        <div className=" md:p-12">
-          <h1 className="font-bold text-4xl">ijekerTech</h1>
-          <p className="text-gray-600">We craft high-performance digital experienced that drive real bussiness result.</p>
+        <div className="p-4  md:p-12">
+          <h1 className="font-bold text-4xl text-center">ijekerTech</h1>
+          <p className="text-gray-600 text-center">We craft high-performance digital experienced that drive real bussiness result.</p>
           <div className="flex gap-8 text-2xl mt-2 ">
             <a href="https://github.com/ijekertech"><FaGithub className='text-green-500 font-bold target-blank' /></a>
             <a href="https://facebook.com/profile.php?id=61579048111215"><FaFacebook className='text-green-500 font-bold' /></a>

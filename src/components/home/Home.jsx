@@ -12,7 +12,7 @@ import {
   Cloud,
   AirVent,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ServicesTabs from "./ServicesTabs";
 
 /* ---------------------- Variants for Reuse ---------------------- */
@@ -201,13 +201,23 @@ const Home = () => {
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`w-3 h-3 rounded-full transition-all ${
-                i === current ? "bg-white scale-125" : "bg-gray-400 hover:bg-white"
-              }`}
+              className={`w-3 h-3 rounded-full transition-all ${i === current ? "bg-white scale-125" : "bg-gray-400 hover:bg-white"
+                }`}
             />
           ))}
         </div>
       </div>
+
+      {/* Breadcrumb */}
+      <nav className="max-w-6xl mx-auto px-4 py-4 text-sm text-gray-600">
+        <Link to="/" className="hover:text-purple-600 font-medium">
+          Home
+        </Link>{" "}
+        /{" "}
+       
+      </nav>
+
+
 
       {/* ---------------------- About Section ---------------------- */}
       <section className="bg-white py-20 px-6 md:px-16">

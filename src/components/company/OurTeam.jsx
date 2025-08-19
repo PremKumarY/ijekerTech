@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import FooterBanner from "../footer/FooterBanner";
 import { Lightbulb, Users, Target, Award } from "lucide-react";
 import { FaLinkedin, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function OurTeam() {
   const team = [
@@ -113,7 +114,14 @@ function OurTeam() {
             </select>
           </div>
         </section>
-
+        {/* Breadcrumb */}
+        <nav className="max-w-6xl mx-auto px-4 py-4 text-sm text-gray-600">
+          <Link to="/" className="hover:text-purple-600 font-medium">
+            Home
+          </Link>{" "}
+          /{" "}
+          <span className="text-gray-500"> Company / Our-Team /</span>
+        </nav>
         {/* Team Members */}
         <section className="max-w-7xl mx-auto px-6 py-16">
           {filteredTeam.length > 0 ? (

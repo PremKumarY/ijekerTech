@@ -13,7 +13,14 @@ const BlogPage = () => {
           Insights, stories, and updates from the world of tech and AI.
         </p>
       </section>
-
+      {/* Breadcrumb */}
+      <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
+        <Link to="/" className="hover:text-purple-600 font-medium">
+          Home
+        </Link>{" "}
+        /{" "}
+        <span className="text-gray-500"> Blog /</span>
+      </nav>
       {/* Blog List */}
       <section className="max-w-6xl mx-auto px-6 py-12 grid gap-8 md:grid-cols-2">
         {blogPosts.map((post) => (

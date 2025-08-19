@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FooterBanner from '../footer/FooterBanner'
+import { Link } from "react-router-dom";
 
 function Faq() {
 
@@ -47,7 +48,14 @@ function Faq() {
             Here are some of the most common questions we receive from our community and clients.
           </p>
         </section>
-
+ {/* Breadcrumb */}
+        <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
+          <Link to="/" className="hover:text-purple-600 font-medium">
+            Home
+          </Link>{" "}
+          /{" "}
+          <span className="text-gray-500"> FAQ /</span>
+        </nav>
         {/* FAQ Section */}
         <section className="max-w-4xl mx-auto px-6 py-12">
           <div className="space-y-4">

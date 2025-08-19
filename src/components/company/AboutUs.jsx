@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import FooterBanner from "../footer/FooterBanner";
 import { Users, Cpu, Globe, Rocket, ShieldCheck, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 
 function AboutUs() {
   const stats = [
@@ -59,6 +60,14 @@ function AboutUs() {
             transition={{ duration: 1 }}
           />
         </section>
+        {/* Breadcrumb */}
+        <nav className="max-w-6xl mx-auto px-4 py-4 text-sm text-gray-600">
+          <Link to="/" className="hover:text-purple-600 font-medium">
+            Home
+          </Link>{" "}
+          /{" "}
+          <span className="text-gray-500"> Company / About Us /</span>
+        </nav>
 
         {/* Who We Are */}
         <section className="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-center">

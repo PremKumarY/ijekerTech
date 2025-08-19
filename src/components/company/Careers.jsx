@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Briefcase, MapPin, Clock } from "lucide-react";
 import FooterBanner from "../footer/FooterBanner";
+import { Link } from "react-router-dom";
 
 function Careers() {
   const allJobs = [
@@ -60,9 +61,9 @@ function Careers() {
     <>
       <div className="bg-gray-50 min-h-screen">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-24 px-6 text-center relative overflow-hidden">
+        <section className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-16 md:py-24 px-4 text-center relative overflow-hidden">
           <motion.h1
-            className="text-4xl md:text-5xl font-bold mb-6 drop-shadow-lg"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 drop-shadow-lg"
             initial={{ opacity: 0, y: -40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
@@ -70,7 +71,7 @@ function Careers() {
             Careers at <span className="text-yellow-300">ijekerTech</span>
           </motion.h1>
           <motion.p
-            className="max-w-3xl mx-auto text-lg md:text-xl"
+            className="max-w-3xl mx-auto text-base sm:text-lg md:text-xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.7 }}
@@ -80,16 +81,25 @@ function Careers() {
           </motion.p>
         </section>
 
+        {/* Breadcrumb */}
+        <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
+          <Link to="/" className="hover:text-purple-600 font-medium">
+            Home
+          </Link>{" "}
+          /{" "}
+          <span className="text-gray-500"> Company / Careers /</span>
+        </nav>
+
         {/* Filters */}
-        <section className="max-w-7xl mx-auto px-6 py-10">
-          <div className="flex flex-wrap justify-center gap-4 mb-10">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4 mb-10">
             {/* Job Type Filter */}
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2 justify-center">
               {jobTypes.map((type) => (
                 <button
                   key={type}
                   onClick={() => setSelectedType(type)}
-                  className={`px-4 py-2 rounded-full border font-semibold transition ${
+                  className={`px-4 py-2 rounded-full border font-semibold transition text-sm sm:text-base ${
                     selectedType === type
                       ? "bg-blue-600 text-white border-blue-600"
                       : "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
@@ -101,12 +111,12 @@ function Careers() {
             </div>
 
             {/* Location Filter */}
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2 justify-center">
               {jobLocations.map((loc) => (
                 <button
                   key={loc}
                   onClick={() => setSelectedLocation(loc)}
-                  className={`px-4 py-2 rounded-full border font-semibold transition ${
+                  className={`px-4 py-2 rounded-full border font-semibold transition text-sm sm:text-base ${
                     selectedLocation === loc
                       ? "bg-blue-600 text-white border-blue-600"
                       : "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
@@ -119,7 +129,7 @@ function Careers() {
           </div>
 
           {/* Job Listings */}
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             <AnimatePresence>
               {filteredJobs.length > 0 ? (
                 filteredJobs.map((job) => (
@@ -129,31 +139,31 @@ function Careers() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 50 }}
                     layout
-                    whileHover={{ scale: 1.03, boxShadow: "0 15px 25px rgba(0,0,0,0.2)" }}
-                    transition={{ duration: 0.4 }}
-                    className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 flex flex-col justify-between cursor-pointer"
+                    whileHover={{ scale: 1.02, boxShadow: "0 12px 20px rgba(0,0,0,0.15)" }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-white border border-gray-200 rounded-2xl shadow-md p-5 flex flex-col justify-between"
                   >
                     <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <Briefcase className="text-blue-600" size={24} />
-                        <h3 className="text-xl font-semibold text-gray-900">{job.title}</h3>
+                      <div className="flex items-center gap-3 mb-3">
+                        <Briefcase className="text-blue-600" size={22} />
+                        <h3 className="text-lg sm:text-xl font-semibold text-gray-900">{job.title}</h3>
                       </div>
-                      <div className="flex flex-wrap gap-4 text-gray-500 text-sm mb-4">
+                      <div className="flex flex-wrap gap-3 text-gray-500 text-xs sm:text-sm mb-3">
                         <span className="flex items-center gap-1">
-                          <MapPin size={16} /> {job.location}
+                          <MapPin size={14} /> {job.location}
                         </span>
                         <span className="flex items-center gap-1">
-                          <Clock size={16} /> {job.type}
+                          <Clock size={14} /> {job.type}
                         </span>
                       </div>
-                      <p className="text-gray-700 text-sm mb-4">{job.description}</p>
+                      <p className="text-gray-700 text-sm sm:text-base mb-3">{job.description}</p>
 
                       {/* Tags / Skills */}
                       <div className="flex flex-wrap gap-2">
                         {job.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium hover:bg-blue-200 transition"
+                            className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium hover:bg-blue-200 transition"
                           >
                             {tag}
                           </span>
@@ -163,7 +173,7 @@ function Careers() {
 
                     <a
                       href={job.link}
-                      className="mt-4 block text-center px-5 py-3 bg-blue-600 text-white rounded-lg font-semibold shadow-md hover:bg-blue-700 transition-colors"
+                      className="mt-4 block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold shadow-md hover:bg-blue-700 transition"
                     >
                       Apply Now
                     </a>
@@ -184,9 +194,9 @@ function Careers() {
         </section>
 
         {/* Call to Action */}
-        <section className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-20 px-6 text-center rounded-t-3xl">
+        <section className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16 md:py-20 px-4 text-center rounded-t-3xl">
           <motion.h2
-            className="text-3xl font-bold mb-4"
+            className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
@@ -194,7 +204,7 @@ function Careers() {
             Didn't find your dream role?
           </motion.h2>
           <motion.p
-            className="max-w-2xl mx-auto text-lg mb-6"
+            className="max-w-2xl mx-auto text-base sm:text-lg mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
@@ -205,7 +215,7 @@ function Careers() {
             href="mailto:ijekerTech@gmail.com"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="px-6 py-3 bg-white text-indigo-700 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition-colors"
+            className="px-5 py-3 w-full sm:w-auto bg-white text-indigo-700 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition"
           >
             Submit Resume
           </motion.a>
