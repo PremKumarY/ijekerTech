@@ -1,6 +1,6 @@
 import React from 'react'
 import FooterBanner from '../footer/FooterBanner'
-
+import { Link } from 'react-router-dom'
 function Testimonials() {
   const testimonials = [
     {
@@ -36,7 +36,14 @@ function Testimonials() {
             Here’s what our valued clients have to say about their experience with ijekerTech.
           </p>
         </section>
-
+ {/* Breadcrumb */}
+        <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
+          <Link to="/" className="hover:text-purple-600 font-medium">
+            Home
+          </Link>{" "}
+          /{" "}
+          <span className="text-gray-500"> Testimonials /</span>
+        </nav>
         {/* Testimonials */}
         <section className="max-w-6xl mx-auto px-6 py-12">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

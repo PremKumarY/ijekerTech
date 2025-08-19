@@ -1,5 +1,7 @@
 import React from 'react';
 import FooterBanner from '../footer/FooterBanner';
+import {Link} from 'react-router-dom';
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 function WebDevelopment() {
@@ -36,7 +38,14 @@ function WebDevelopment() {
             We build fast, secure, and scalable websites that bring your ideas to life and help your business grow.
           </motion.p>
         </section>
-
+ {/* Breadcrumb */}
+        <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
+          <Link to="/" className="hover:text-purple-600 font-medium">
+            Home
+          </Link>{" "}
+          /{" "}
+          <span className="text-gray-500"> IT Solution / Web Development</span>
+        </nav>
         {/* Services Section */}
         <section className="py-20 max-w-7xl mx-auto px-6">
           <motion.h2 className="text-3xl font-bold text-center mb-12"

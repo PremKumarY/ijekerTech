@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  FaUserCog,
   FaEnvelope,
   FaPhone,
   FaMapMarkerAlt,
@@ -9,19 +8,261 @@ import {
   FaClock,
   FaCalendarAlt,
   FaCertificate,
+  FaCamera,
 } from "react-icons/fa";
 
-function Profile() {
-  const [activePage, setActivePage] = useState("dashboard");
 
-  const userDetails = {
-    fullName: "Sudent",
-    email: "sudent@example.com",
-    phone: "+91 XXXXXXXX47",
-    location: "India",
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+
+// ============================
+// Dashboard Section
+// ============================
+function Dashboard({ userDetails, trainingDetails, certificates, setActivePage }) {
+  return (
+    <motion.div
+      className="w-full"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* Welcome */}
+      <header className="mb-6 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <img
+            src={userDetails.avatar}
+            alt="profile"
+            className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover border-2 border-indigo-600"
+          />
+          <div>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-wide">
+              Welcome Back, {userDetails.fullName} 👋
+            </h2>
+            <p className="text-gray-600 mt-1 text-sm md:text-base">
+              Manage your profile, training progress & certificates here.
+            </p>
+          </div>
+        </div>
+
+        {/* ✅ Update Profile Button */}
+        <button
+          onClick={() => setActivePage("settings")}
+          className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold text-sm md:text-base shadow transition"
+        >
+          Update Profile
+        </button>
+      </header>
+
+
+      {/* User Details */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        {[
+          { icon: <FaUser />, label: "Full Name", value: userDetails.fullName },
+          { icon: <FaEnvelope />, label: "Email", value: userDetails.email },
+          { icon: <FaPhone />, label: "Phone", value: userDetails.phone },
+          { icon: <FaMapMarkerAlt />, label: "Location", value: userDetails.location },
+        ].map(({ icon, label, value }) => (
+          <div
+            key={label}
+            className="flex items-center gap-4 rounded-lg p-4 bg-white shadow hover:shadow-md transition"
+          >
+            <span className="text-indigo-600">{icon}</span>
+            <div>
+              <p className="text-gray-500 text-xs uppercase tracking-wide font-medium">{label}</p>
+              <p className="text-gray-900 font-semibold text-sm">{value}</p>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {/* Training Details */}
+      <section className="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6">
+        <h3 className="text-lg font-bold flex items-center gap-3 mb-4">
+          <FaGraduationCap className="text-blue-600" /> Training Details
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <DetailItem icon={<FaGraduationCap />} label="Course" value={trainingDetails.course} />
+          <DetailItem icon={<FaClock />} label="Duration" value={trainingDetails.duration} />
+          <DetailItem icon={<FaCalendarAlt />} label="Start Date" value={trainingDetails.startDate} />
+          <DetailItem
+            icon={<FaCertificate />}
+            label="Status"
+            value={
+              <span className="bg-green-200 text-green-800 text-xs px-2 py-1 rounded-md font-semibold">
+                {trainingDetails.status}
+              </span>
+            }
+          />
+        </div>
+      </section>
+
+      {/* Certificates */}
+      <section className="bg-white rounded-lg shadow-md p-4 md:p-6">
+        <h3 className="text-lg font-bold flex items-center gap-3 mb-4">
+          <FaCertificate className="text-yellow-500" /> Certificates
+        </h3>
+        <div className="space-y-3">
+          {certificates.map(({ name, link }, index) => (
+            <div
+              key={index}
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center border border-gray-200 rounded-lg px-4 py-3 hover:shadow transition"
+            >
+              <p className="text-gray-900 font-medium mb-2 sm:mb-0">{name}</p>
+              <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs md:text-sm font-semibold px-3 py-2 rounded transition text-center"
+              >
+                Download
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+    </motion.div>
+  );
+}
+
+// Small reusable item
+const DetailItem = ({ icon, label, value }) => (
+  <div className="flex items-center gap-3 text-gray-700">
+    <div className="text-blue-600">{icon}</div>
+    <div>
+      <p className="text-xs md:text-sm text-gray-500">{label}</p>
+      <p className="font-semibold text-gray-900 text-sm md:text-base">{value}</p>
+    </div>
+  </div>
+);
+
+// ============================
+// Settings Form
+// ============================
+function Settings({ userDetails, setUserDetails, setActivePage }) {
+  const [formData, setFormData] = useState(userDetails);
+  const [preview, setPreview] = useState(userDetails.avatar);
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
   };
 
-  // New Training Details and Certificates data
+  // ✅ handle profile image change
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+        setFormData({ ...formData, avatar: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setUserDetails(formData); // ✅ update parent state
+    alert("Profile Updated Successfully ✅");
+    setActivePage("dashboard");
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="w-full"
+    >
+      <button
+        onClick={() => setActivePage("dashboard")}
+        className="mb-4 text-indigo-600 font-semibold hover:text-indigo-800 flex items-center gap-2 text-sm"
+      >
+        ← Back to Dashboard
+      </button>
+
+      <h2 className="text-xl md:text-2xl font-extrabold text-gray-900 mb-6 tracking-wide">
+        Profile Settings
+      </h2>
+
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 md:p-8 rounded-lg shadow space-y-5"
+      >
+        {/* Profile Picture Upload */}
+        <div className="flex flex-col items-center">
+          <div className="relative">
+            <img
+              src={preview}
+              alt="preview"
+              className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-2 border-indigo-500"
+            />
+            <label
+              htmlFor="avatarUpload"
+              className="absolute bottom-0 right-0 bg-indigo-600 text-white p-2 rounded-full cursor-pointer shadow"
+            >
+              <FaCamera size={14} />
+            </label>
+            <input
+              id="avatarUpload"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageChange}
+            />
+          </div>
+          <p className="text-xs text-gray-500 mt-2">Upload new profile picture</p>
+        </div>
+
+        {/* Text Fields */}
+        {[
+          { id: "fullName", label: "Full Name", type: "text" },
+          { id: "email", label: "Email Address", type: "email" },
+          { id: "phone", label: "Phone", type: "text" },
+          { id: "location", label: "Location", type: "text" },
+        ].map(({ id, label, type }) => (
+          <div key={id}>
+            <label htmlFor={id} className="block text-gray-700 font-medium mb-2 text-sm">
+              {label}
+            </label>
+            <input
+              id={id}
+              type={type}
+              value={formData[id]}
+              onChange={handleChange}
+              placeholder={`Enter ${label.toLowerCase()}`}
+              className="w-full border border-gray-300 rounded px-3 py-2 text-gray-900 placeholder-gray-400
+              focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"
+            />
+          </div>
+        ))}
+
+        <button
+          type="submit"
+          className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 md:py-3 rounded-lg text-sm md:text-base transition"
+        >
+          Save Settings
+        </button>
+      </form>
+    </motion.div>
+  );
+}
+
+// ============================
+// Main Dashboard Layout
+// ============================
+export default function ProfileDashboard() {
+  const [activePage, setActivePage] = useState("dashboard");
+
+  // ✅ User details as state (with avatar now)
+  const [userDetails, setUserDetails] = useState({
+    fullName: "Student",
+    email: "student@example.com",
+    phone: "+91 XXXXXXXX47",
+    location: "India",
+    avatar: "https://i.pravatar.cc/150?img=5", // default image
+  });
+
   const trainingDetails = {
     course: "Full Stack Web Development",
     duration: "3 Months",
@@ -34,252 +275,38 @@ function Profile() {
     { name: "AI & Machine Learning Workshop", link: "#" },
   ];
 
-  const renderContent = () => {
-    switch (activePage) {
-      case "dashboard":
-        return (
-          <>
-            <header className="mb-10 flex flex-col md:flex-row md:items-center md:justify-between">
-              <h2
-                className="text-4xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-700 to-pink-600
-                           bg-clip-text text-transparent select-none tracking-wide"
-              >
-                Welcome Back, {userDetails.fullName}!
-              </h2>
-            </header>
-
-            <p className="text-gray-700 mb-12 max-w-xl text-lg leading-relaxed tracking-wide">
-              Manage your profile information and preferences from here.
-            </p>
-
-            {/* User Details List */}
-            <section className="max-w-md w-full space-y-8 mb-16">
-              {[ 
-                { icon: <FaUser size={22} className="text-indigo-600" />, label: "Full Name", value: userDetails.fullName },
-                { icon: <FaEnvelope size={22} className="text-indigo-600" />, label: "Email", value: userDetails.email },
-                { icon: <FaPhone size={22} className="text-indigo-600" />, label: "Phone", value: userDetails.phone },
-                { icon: <FaMapMarkerAlt size={22} className="text-indigo-600" />, label: "Location", value: userDetails.location },
-              ].map(({ icon, label, value }) => (
-                <div
-                  key={label}
-                  className="flex items-center gap-5 rounded-lg p-4 hover:bg-indigo-50 transition cursor-default"
-                  aria-label={`${label}: ${value}`}
-                >
-                  {icon}
-                  <div>
-                    <p className="text-gray-600 text-xs uppercase tracking-widest font-semibold">
-                      {label}
-                    </p>
-                    <p className="text-gray-900 text-xl font-semibold">{value}</p>
-                  </div>
-                </div>
-              ))}
-            </section>
-
-            {/* Training Details Section */}
-            <section className="max-w-3xl w-full mb-16 bg-white rounded-xl shadow-md p-8 space-y-6">
-              <h3 className="text-xl font-bold flex items-center gap-3 text-gray-900">
-                <FaGraduationCap className="text-blue-600" /> Training Details
-              </h3>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-10 text-gray-700">
-                <div className="flex items-center gap-3">
-                  <FaGraduationCap className="text-blue-600" />
-                  <div>
-                    <p className="text-sm text-gray-500">Course</p>
-                    <p className="font-semibold text-gray-900">{trainingDetails.course}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <FaClock className="text-blue-600" />
-                  <div>
-                    <p className="text-sm text-gray-500">Duration</p>
-                    <p className="font-semibold text-gray-900">{trainingDetails.duration}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <FaCalendarAlt className="text-blue-600" />
-                  <div>
-                    <p className="text-sm text-gray-500">Start Date</p>
-                    <p className="font-semibold text-gray-900">{trainingDetails.startDate}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <FaCertificate className="text-blue-600" />
-                  <div>
-                    <p className="text-sm text-gray-500">Status</p>
-                    <span className="inline-block bg-green-200 text-green-800 text-xs px-3 py-1 rounded-md font-semibold select-none">
-                      {trainingDetails.status}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Certificates Section */}
-            <section className="max-w-3xl w-full bg-white rounded-xl shadow-md p-6 space-y-4">
-              <h3 className="text-xl font-bold flex items-center gap-3 text-gray-900">
-                <FaCertificate className="text-yellow-500" /> Certificates
-              </h3>
-
-              {certificates.map(({ name, link }, index) => (
-                <div
-                  key={index}
-                  className="flex justify-between items-center border border-gray-200 rounded-md px-6 py-3 hover:shadow-md transition"
-                >
-                  <p className="text-gray-900 font-medium">{name}</p>
-                  <a
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-md transition"
-                  >
-                    Download
-                  </a>
-                </div>
-              ))}
-            </section>
-
-            {/* Settings Shortcut Button */}
-            <button
-              onClick={() => setActivePage("settings")}
-              className="mt-14 px-10 py-4 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800
-                         text-white rounded-xl text-lg font-semibold shadow-lg transition
-                         focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-opacity-50"
-            >
-              Go to Profile Settings
-            </button>
-          </>
-        );
-
-      case "settings":
-        return (
-          <>
-            <button
-              onClick={() => setActivePage("dashboard")}
-              className="mb-10 text-indigo-600 font-semibold hover:text-indigo-800 flex items-center gap-2 text-lg"
-            >
-              ← Back to Dashboard
-            </button>
-
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-12 tracking-wide">
-              Profile Settings
-            </h2>
-
-            <form className="max-w-xl w-full bg-white p-10 rounded-2xl shadow-xl space-y-10">
-              {/* Full Name */}
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-gray-800 font-semibold mb-3 text-lg"
-                >
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  defaultValue={userDetails.fullName}
-                  placeholder="Enter your full name"
-                  className="w-full border border-gray-300 rounded-lg px-6 py-4 text-gray-900 placeholder-gray-400
-                    focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:border-transparent text-lg transition"
-                />
-              </div>
-
-              {/* Email Address */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-gray-800 font-semibold mb-3 text-lg"
-                >
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  defaultValue={userDetails.email}
-                  placeholder="Enter your email address"
-                  className="w-full border border-gray-300 rounded-lg px-6 py-4 text-gray-900 placeholder-gray-400
-                    focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:border-transparent text-lg transition"
-                />
-              </div>
-
-              {/* Current Password */}
-              <div>
-                <label
-                  htmlFor="currentPassword"
-                  className="block text-gray-800 font-semibold mb-3 text-lg"
-                >
-                  Current Password
-                </label>
-                <input
-                  type="password"
-                  id="currentPassword"
-                  placeholder="Enter current password"
-                  className="w-full border border-gray-300 rounded-lg px-6 py-4 text-gray-900 placeholder-gray-400
-                    focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:border-transparent text-lg transition"
-                />
-              </div>
-
-              {/* New Password */}
-              <div>
-                <label
-                  htmlFor="newPassword"
-                  className="block text-gray-800 font-semibold mb-3 text-lg"
-                >
-                  New Password
-                </label>
-                <input
-                  type="password"
-                  id="newPassword"
-                  placeholder="Enter new password"
-                  className="w-full border border-gray-300 rounded-lg px-6 py-4 text-gray-900 placeholder-gray-400
-                    focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:border-transparent text-lg transition"
-                />
-              </div>
-
-              {/* Confirm New Password */}
-              <div>
-                <label
-                  htmlFor="confirmNewPassword"
-                  className="block text-gray-800 font-semibold mb-3 text-lg"
-                >
-                  Confirm New Password
-                </label>
-                <input
-                  type="password"
-                  id="confirmNewPassword"
-                  placeholder="Confirm new password"
-                  className="w-full border border-gray-300 rounded-lg px-6 py-4 text-gray-900 placeholder-gray-400
-                    focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:border-transparent text-lg transition"
-                />
-              </div>
-
-              {/* Save Button */}
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800
-                  text-white font-bold py-4 rounded-xl shadow-lg text-xl transition transform hover:-translate-y-1
-                  focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-opacity-50"
-              >
-                Save Settings
-              </button>
-            </form>
-          </>
-        );
-
-      default:
-        return null;
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gray-50 p-8 md:p-20 flex flex-col items-center">
-      {renderContent()}
+    <div className="min-h-screen bg-gray-100">
+      {/* Header */}
+      <header className="bg-white shadow px-4 md:px-6 py-3 flex justify-between items-center">
+        <h1 className="text-lg md:text-xl font-bold capitalize">{activePage}</h1>
+        <div className="flex items-center gap-2 md:gap-3">
+          <span className="hidden sm:block text-sm md:text-base">{userDetails.fullName}</span>
+          <img
+            src={userDetails.avatar}
+            alt="avatar"
+            className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover"
+          />
+        </div>
+      </header>
+
+      {/* Page Content */}
+      <main className="p-4 md:p-6">
+        {activePage === "dashboard" ? (
+          <Dashboard
+            userDetails={userDetails}
+            trainingDetails={trainingDetails}
+            certificates={certificates}
+            setActivePage={setActivePage}
+          />
+        ) : (
+          <Settings
+            userDetails={userDetails}
+            setUserDetails={setUserDetails}
+            setActivePage={setActivePage}
+          />
+        )}
+      </main>
     </div>
   );
 }
-
-export default Profile;

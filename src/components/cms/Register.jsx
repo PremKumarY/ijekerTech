@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function InternshipPage() {
+function Register() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,7 +20,7 @@ function InternshipPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Your application has been submitted successfully!");
+    alert("Currently Internship applications are not active!");
     console.log(formData);
     // Later integrate with backend API
   };
@@ -59,6 +59,13 @@ function InternshipPage() {
         <h2 className="text-2xl font-bold text-blue-700 mb-6">
           Apply for Internship
         </h2>
+
+        {/* Notice Banner */}
+        <div className="bg-yellow-100 text-yellow-800 p-4 rounded-lg mb-6 border border-yellow-300">
+          ⚠️ Internship applications are currently <b>inactive</b>.  
+          Please check back later.
+        </div>
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -67,7 +74,7 @@ function InternshipPage() {
             value={formData.name}
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg p-3"
-            required
+            disabled
           />
           <input
             type="email"
@@ -76,7 +83,7 @@ function InternshipPage() {
             value={formData.email}
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg p-3"
-            required
+            disabled
           />
           <input
             type="tel"
@@ -85,7 +92,7 @@ function InternshipPage() {
             value={formData.phone}
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg p-3"
-            required
+            disabled
           />
           <input
             type="file"
@@ -93,7 +100,7 @@ function InternshipPage() {
             accept=".pdf,.doc,.docx"
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg p-3"
-            required
+            disabled
           />
           <textarea
             name="message"
@@ -102,12 +109,14 @@ function InternshipPage() {
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg p-3"
             rows="4"
+            disabled
           ></textarea>
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition"
+            className="w-full bg-gray-400 cursor-not-allowed text-white py-3 rounded-lg font-semibold transition"
+            disabled
           >
-            Submit Application
+            🚫 Applications Closed
           </button>
         </form>
       </div>
@@ -115,4 +124,4 @@ function InternshipPage() {
   );
 }
 
-export default InternshipPage;
+export default Register;
