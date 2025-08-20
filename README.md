@@ -1,12 +1,46 @@
-# React + Vite
+🚀 IjekerTech – Official Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+IjekerTech is an IT Consulting & Services company focused on AI Solutions, Web Development, Cloud Services, and Digital Transformation.
+This repository contains the official frontend website of IjekerTech, built with React + Vite + Tailwind CSS for performance, scalability, and modern UI/UX.
 
-Currently, two official plugins are available:
+✨ Key Highlights
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+⚡ High Performance – Powered by Vite with HMR
 
-## Expanding the ESLint configuration
+🎨 Modern UI – TailwindCSS + Framer Motion animations
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🌐 Responsive – Mobile-first & cross-browser support
+
+🛠️ Maintainable Code – Modular & reusable components
+
+🔒 Secure Development – No secrets or sensitive info in repo
+
+🏗️ Tech Stack
+
+Frontend: React + Vite
+
+Styling: Tailwind CSS, Framer Motion
+
+Icons: React Icons / Lucide-react
+
+Hosting: Vercel (CI/CD enabled)
+
+🤝 Contribution
+
+We welcome contributions!
+
+Fork this repo
+
+Create a branch (feature-xyz)
+
+Commit your changes
+
+Push branch & open PR
+
+📧 Contact
+
+💼 ijekerTech – IT Consulting & Services
+📍 Offices: Lucknow | Noida | Gorakhapur | Remote
+🌐 Website: www.ijekertech.com
+
+✉️ Email: ijekertech@gmail.com
