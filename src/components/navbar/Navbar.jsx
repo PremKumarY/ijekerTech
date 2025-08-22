@@ -8,7 +8,7 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const [openDesktopDropdown, setOpenDesktopDropdown] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [username] = useState("Prem Kumar");
+  const [username] = useState("Student");
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const location = useLocation();
