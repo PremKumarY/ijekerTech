@@ -111,7 +111,7 @@ const team = [
     image: "/man.png",
   },
   {
-    name: "Priya Singh",
+    name: "Sonam Yadav",
     role: "Lead Designer",
     bio: "Creates beautiful and functional user experiences.",
     image: "/woman.png",
