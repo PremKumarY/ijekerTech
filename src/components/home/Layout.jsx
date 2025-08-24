@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import NavbarBanner from '../navbar/NavbarBanner'
 import Navbar from '../navbar/Navbar'
 import Footer from '../footer/Footer'
+import ChatPopup from '../chat/ChatPopup'
 
 
 function Layout() {
@@ -13,6 +14,9 @@ function Layout() {
       <main className="flex-grow">
         <Outlet />
       </main>
+
+      <ChatPopup />
+
       <Footer />
     </div>
   )

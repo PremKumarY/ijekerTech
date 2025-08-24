@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import ServicesTabs from "./ServicesTabs";
+import CountdownGame from "../countdown/CountdownGame";
 
 /* ---------------------- Variants for Reuse ---------------------- */
 const fadeInUp = {
@@ -214,8 +215,12 @@ const Home = () => {
           Home
         </Link>{" "}
         /{" "}
-       
+
       </nav>
+
+      
+      {/* CountdownGame */}
+      <CountdownGame />
 
 
 
