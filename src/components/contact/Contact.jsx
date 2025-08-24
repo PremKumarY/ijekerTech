@@ -1,20 +1,57 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from "react";
 // eslint-disable-next-line no-unused-vars
-import { motion } from 'framer-motion';
-import { FaLinkedin, FaTwitter, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaArrowDown } from 'react-icons/fa';
-import FooterBanner from '../footer/FooterBanner';
-import { Link } from 'react-router-dom';
+import { motion } from "framer-motion";
+import {
+  FaLinkedin,
+  FaTwitter,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaArrowDown,
+} from "react-icons/fa";
+import FooterBanner from "../footer/FooterBanner";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
   const formRef = useRef(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
+  // Scroll to form
   const scrollToForm = () => {
     if (formRef.current) {
-      formRef.current.scrollIntoView({ behavior: 'smooth' });
+      formRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const inputFocusClass = "focus:ring-2 focus:ring-blue-500 focus:border-transparent";
+  // Handle Input Change
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle Form Submit (using mailto OR API integration)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.message) {
+      alert("⚠️ Please fill out all fields before submitting.");
+      return;
+    }
+
+    // Mailto fallback (opens user’s default email app with pre-filled data)
+    window.location.href = `mailto:ijekerTech@gmail.com?subject=Message from ${formData.name}&body=${formData.message} (Reply to: ${formData.email})`;
+
+    // If you have backend, replace above with API POST request
+    // fetch("/api/contact", { method:"POST", body: JSON.stringify(formData) })
+    //   .then(() => alert("✅ Message Sent Successfully!"))
+    //   .catch(() => alert("❌ Failed to send message."));
+  };
+
+  const inputFocusClass =
+    "focus:ring-2 focus:ring-blue-500 focus:border-transparent";
 
   return (
     <>
@@ -49,7 +86,8 @@ const Contact = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            We look forward to hearing from you! Let's collaborate and build something amazing.
+            We look forward to hearing from you! Let's collaborate and build
+            something amazing.
           </motion.p>
           <motion.button
             onClick={scrollToForm}
@@ -61,18 +99,20 @@ const Contact = () => {
           </motion.button>
         </div>
       </div>
-       {/* Breadcrumb */}
-        <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
-          <Link to="/" className="hover:text-purple-600 font-medium">
-            Home
-          </Link>{" "}
-          /{" "}
-          <span className="text-gray-500"> Contact /</span>
-        </nav>
+
+      {/* Breadcrumb */}
+      <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
+        <Link to="/" className="hover:text-purple-600 font-medium">
+          Home
+        </Link>{" "}
+        / <span className="text-gray-500"> Contact</span>
+      </nav>
 
       {/* Contact Section */}
-      <section className="min-h-[60vh] w-full bg-gray-50 flex flex-col md:flex-row p-6 md:p-16 gap-10" ref={formRef}>
-        
+      <section
+        className="min-h-[60vh] w-full bg-gray-50 flex flex-col md:flex-row p-6 md:p-16 gap-10"
+        ref={formRef}
+      >
         {/* Contact Form */}
         <motion.div
           className="md:w-1/2 w-full bg-white shadow-xl rounded-2xl p-6 md:p-10"
@@ -81,28 +121,45 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">Get in Touch</h2>
-          <form className="space-y-5">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+            Get in Touch
+          </h2>
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Name
+              </label>
               <input
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="Your Name"
                 className={`w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition-all duration-300 ${inputFocusClass}`}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email
+              </label>
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="your@email.com"
                 className={`w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition-all duration-300 ${inputFocusClass}`}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Message
+              </label>
               <textarea
+                name="message"
                 rows="5"
+                value={formData.message}
+                onChange={handleChange}
                 placeholder="Your Message"
                 className={`w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm transition-all duration-300 ${inputFocusClass}`}
               ></textarea>
@@ -126,21 +183,41 @@ const Contact = () => {
         >
           {/* Contact Info */}
           <div className="bg-white shadow-xl rounded-2xl p-6 flex flex-col gap-4">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Contact Info</h3>
-            <div className="flex items-center gap-3 text-gray-700">
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Contact Info
+            </h3>
+            <a
+              href="tel:+911234567890"
+              className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition"
+            >
               <FaPhoneAlt className="text-blue-600" /> <span>+91 12345 67890</span>
-            </div>
+            </a>
+            <a
+              href="mailto:ijekerTech@gmail.com"
+              className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition"
+            >
+              <FaEnvelope className="text-blue-600" />{" "}
+              <span>ijekerTech@gmail.com</span>
+            </a>
             <div className="flex items-center gap-3 text-gray-700">
-              <FaEnvelope className="text-blue-600" /> <span>ijekerTech@gmail.com</span>
-            </div>
-            <div className="flex items-center gap-3 text-gray-700">
-              <FaMapMarkerAlt className="text-blue-600" /> <span>Lucknow, India</span>
+              <FaMapMarkerAlt className="text-blue-600" />{" "}
+              <span>Lucknow, India</span>
             </div>
             <div className="flex items-center gap-4 mt-3">
-              <a href="https://www.linkedin.com/in/prem-kumar-yadav" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-600 transition">
+              <a
+                href="https://www.linkedin.com/in/prem-kumar-yadav"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-blue-600 transition"
+              >
                 <FaLinkedin size={24} />
               </a>
-              <a href="https://twitter.com/prem_kumar_yadav" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-400 transition">
+              <a
+                href="https://twitter.com/prem_kumar_yadav"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-blue-400 transition"
+              >
                 <FaTwitter size={24} />
               </a>
             </div>

@@ -44,6 +44,7 @@ const slides = [
     description:
       "Grursus suada faci Lorem ipsum dolarorit ametion consectetur elit. Vesti at bulum nec odio aea the dumm ipsumm and fadolorit to the consectetur dummy text elit.",
     buttonText: "Get Details",
+    buttonLink: "/company/about",
   },
   {
     id: 2,
@@ -52,6 +53,7 @@ const slides = [
     description:
       "Accelerate your digital transformation journey with our cutting-edge strategies and modern technologies.",
     buttonText: "Explore More",
+    buttonLink: "/itsolutions/AllServices",
   },
   {
     id: 3,
@@ -60,6 +62,7 @@ const slides = [
     description:
       "We deliver IT solutions that fuel productivity, performance, and profitability for your company.",
     buttonText: "Start Now",
+    buttonLink: "/contact",
   },
 ];
 
@@ -69,31 +72,37 @@ const services = [
     icon: <Pencil className="w-10 h-10 text-blue-500" />,
     title: "IT Design",
     desc: "Creative design solutions tailored to your IT needs, ensuring both usability and aesthetics.",
+    link: "/services/it-design",
   },
   {
     icon: <Settings className="w-10 h-10 text-blue-500" />,
     title: "IT Management",
     desc: "Reliable IT infrastructure and management services to keep your business running smoothly.",
+    link: "/services/it-management",
   },
   {
     icon: <AirVent className="w-10 h-10 text-blue-500" />,
     title: "AI & Automation",
     desc: "Cutting-edge AI-driven solutions and automation to scale efficiency and performance.",
+    link: "/services/ai-automation",
   },
   {
     icon: <ShieldCheck className="w-10 h-10 text-blue-500" />,
     title: "Data Security",
     desc: "Robust security solutions to safeguard your data and maintain compliance standards.",
+    link: "/services/data-security",
   },
   {
     icon: <Cloud className="w-10 h-10 text-blue-500" />,
     title: "Cloud Solutions",
     desc: "Scalable cloud services for flexibility, performance, and cost-efficiency.",
+    link: "/services/cloud",
   },
   {
     icon: <Cpu className="w-10 h-10 text-blue-500" />,
     title: "Consulting",
     desc: "Expert consulting to align technology with your business strategy effectively.",
+    link: "/services/consulting",
   },
 ];
 
@@ -129,8 +138,6 @@ const team = [
 const Home = () => {
   const [current, setCurrent] = useState(0);
   const navigate = useNavigate();
-
-  const handleClick = () => navigate("itsolutions/AllServices");
 
   useEffect(() => {
     const timer = setInterval(
@@ -185,6 +192,7 @@ const Home = () => {
                 {slides[current].description}
               </motion.p>
               <motion.button
+                onClick={() => navigate(slides[current].buttonLink)}
                 className="group flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-semibold transition"
                 initial={{ scale: 0.95, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -202,8 +210,11 @@ const Home = () => {
             <button
               key={i}
               onClick={() => setCurrent(i)}
-              className={`w-3 h-3 rounded-full transition-all ${i === current ? "bg-white scale-125" : "bg-gray-400 hover:bg-white"
-                }`}
+              className={`w-3 h-3 rounded-full transition-all ${
+                i === current
+                  ? "bg-white scale-125"
+                  : "bg-gray-400 hover:bg-white"
+              }`}
             />
           ))}
         </div>
@@ -215,14 +226,10 @@ const Home = () => {
           Home
         </Link>{" "}
         /{" "}
-
       </nav>
 
-      
       {/* CountdownGame */}
       <CountdownGame />
-
-
 
       {/* ---------------------- About Section ---------------------- */}
       <section className="bg-white py-20 px-6 md:px-16">
@@ -240,7 +247,8 @@ const Home = () => {
               We Promise High Quality IT Solutions
             </h2>
             <p className="text-gray-500 text-xl mt-4">
-              Over <span className="text-blue-600 font-semibold">2,500+</span> Customers
+              Over <span className="text-blue-600 font-semibold">2,500+</span>{" "}
+              Customers
             </p>
             <div className="w-20 h-[2px] bg-blue-600 mt-4"></div>
             <p className="text-gray-600 mt-6 leading-relaxed">
@@ -248,6 +256,12 @@ const Home = () => {
               experience. From startups to enterprises, our focus remains on
               performance, reliability, and customer success.
             </p>
+            <button
+              onClick={() => navigate("/company/about")}
+              className="mt-6 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition"
+            >
+              Learn More <ArrowUpRight />
+            </button>
           </motion.div>
 
           <motion.div
@@ -257,24 +271,11 @@ const Home = () => {
             viewport={{ once: true }}
             variants={scaleIn}
           >
-            <img src="/img3.jpg" alt="Team" className="w-full h-full object-cover" />
-            <motion.div
-              className="absolute bottom-6 left-6 bg-blue-600 text-white px-6 py-4 rounded-lg shadow-lg flex items-center"
-              animate={{
-                y: [0, -10, 0, 10, 0],
-                x: [0, 5, 0, -5, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <span className="text-4xl font-bold mr-4">5+</span>
-              <div className="border-l border-white pl-4 uppercase text-sm tracking-wide">
-                Year’s Experience in IT
-              </div>
-            </motion.div>
+            <img
+              src="/img3.jpg"
+              alt="Team"
+              className="w-full h-full object-cover"
+            />
           </motion.div>
         </div>
       </section>
@@ -298,7 +299,7 @@ const Home = () => {
               </h2>
             </div>
             <button
-              onClick={handleClick}
+              onClick={() => navigate("/itsolutions/AllServices")}
               className="mt-6 md:mt-0 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition"
             >
               View All Services <ArrowUpRight />
@@ -315,14 +316,23 @@ const Home = () => {
             {services.map((service, idx) => (
               <motion.div
                 key={idx}
-                whileHover={{ y: -10, scale: 1.05, rotate: [0, 2, -2, 0] }}
-                className="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 text-center border border-gray-200"
+                whileHover={{
+                  y: -10,
+                  scale: 1.05,
+                  rotate: [0, 2, -2, 0],
+                }}
+                onClick={() => navigate(service.link)}
+                className="cursor-pointer bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 text-center border border-gray-200"
               >
                 <div className="flex justify-center mb-4 bg-gradient-to-tr from-blue-100 to-blue-50 rounded-full p-4">
                   {service.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{service.desc}</p>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                  {service.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {service.desc}
+                </p>
               </motion.div>
             ))}
           </motion.div>
@@ -352,15 +362,24 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8, scale: 1.03, boxShadow: "0 15px 35px rgba(0,0,0,0.15)" }}
-                className="bg-white border border-gray-200 rounded-lg shadow-md transition p-6 text-center"
+                whileHover={{
+                  y: -8,
+                  scale: 1.03,
+                  boxShadow: "0 15px 35px rgba(0,0,0,0.15)",
+                }}
+                onClick={() =>
+                  navigate(`/team/${member.name.replace(/\s+/g, "-").toLowerCase()}`)
+                }
+                className="cursor-pointer bg-white border border-gray-200 rounded-lg shadow-md transition p-6 text-center"
               >
                 <img
                   src={member.image}
                   alt={member.name}
                   className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-blue-500 object-cover"
                 />
-                <h3 className="text-lg font-semibold text-gray-800">{member.name}</h3>
+                <h3 className="text-lg font-semibold text-gray-800">
+                  {member.name}
+                </h3>
                 <p className="text-sm text-blue-600">{member.role}</p>
                 <p className="mt-3 text-gray-600 text-sm">{member.bio}</p>
               </motion.div>
@@ -385,11 +404,19 @@ const Home = () => {
             Have questions or want to work with us? Contact our team today.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <button className="flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition transform hover:-translate-y-1">
-              <Users className="w-5 h-5 transition-transform group-hover:scale-110" /> Contact Sales
+            <button
+              onClick={() => navigate("/contact")}
+              className="flex items-center gap-2 bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition transform hover:-translate-y-1"
+            >
+              <Users className="w-5 h-5 transition-transform group-hover:scale-110" />{" "}
+              Contact Sales
             </button>
-            <button className="flex items-center gap-2 bg-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition transform hover:-translate-y-1">
-              <Phone className="w-5 h-5 transition-transform group-hover:scale-110" /> Call Us Now
+            <button
+              onClick={() => (window.location.href = "tel:+916392554947")}
+              className="flex items-center gap-2 bg-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition transform hover:-translate-y-1"
+            >
+              <Phone className="w-5 h-5 transition-transform group-hover:scale-110" />{" "}
+              Call Us Now
             </button>
           </div>
         </div>
