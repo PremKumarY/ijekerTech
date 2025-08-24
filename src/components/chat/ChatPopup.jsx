@@ -1,10 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { MessageCircle, X, CheckCircle, AlertCircle } from "lucide-react";
 
-const API_URL =
-  (import.meta.env?.VITE_BACKEND_URL || "http://localhost:5000") + "/api/chat";
-const LEAD_URL =
-  (import.meta.env?.VITE_BACKEND_URL || "http://localhost:5000") + "/api/leads";
+const API_URL = (import.meta.env?.VITE_BACKEND_URL || "https://chatbot-api-c5on.onrender.com") + "/api/chat";
+const LEAD_URL = (import.meta.env?.VITE_BACKEND_URL || "https://chatbot-api-c5on.onrender.com") + "/api/leads";
 
 function ChatPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,11 +13,11 @@ function ChatPopup() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [suggestions, setSuggestions] = useState([
-   
+
     "Do you offer training or internships?",
     "Career opportunities at ijekerTech",
     "How can I contact the company?",
-   
+
   ]);
 
   const [awaitingLead, setAwaitingLead] = useState(false);
@@ -88,8 +86,8 @@ function ChatPopup() {
     setInput("");
     setSuggestions([
       "Do you offer training or internships?",
-    "Career opportunities at ijekerTech",
-    "How can I contact the company?",
+      "Career opportunities at ijekerTech",
+      "How can I contact the company?",
     ]);
     setAwaitingLead(false);
     setLeadValue("");
@@ -119,7 +117,12 @@ function ChatPopup() {
     setAwaitingLead(false);
 
     try {
-      await fetch(LEAD_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ contact: leadValue }) });
+      await fetch(LEAD_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contact: leadValue })
+      });
+
       setMessages(prev => [...prev, { id: crypto.randomUUID(), from: "bot", text: "✅ Thanks! Your details are saved. How can I help you today?", createdAt: new Date().toISOString() }]);
     } catch (err) { console.error("Lead save failed:", err); }
   };
@@ -133,7 +136,11 @@ function ChatPopup() {
     if (!presetText) setInput("");
 
     try {
-      const res = await fetch(API_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ from: "user", text }) });
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ from: "user", text })
+      });
       if (!res.ok) throw new Error(`Server ${res.status}`);
       const data = await res.json();
 
