@@ -72,7 +72,7 @@ export default function AllServices() {
             IT Management Services & Consultancy
           </h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90">
-            Delivering reliable IT solutions with 27+ years of excellence.
+            Delivering reliable IT solutions with 2+ years of excellence.
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
@@ -100,7 +100,7 @@ export default function AllServices() {
             We provide cutting-edge IT solutions and consultancy services for businesses of all sizes. Our team ensures performance, security, and efficiency in all projects.
           </p>
           <p className="text-gray-600 leading-relaxed">
-            With over 27 years of experience, we’ve helped over 2,500+ clients achieve success through technology.
+            With over 2 years of experience, we’ve helped over 500+ clients achieve success through technology.
           </p>
         </motion.div>
         <motion.img
@@ -117,10 +117,10 @@ export default function AllServices() {
       <section className="bg-blue-50 py-20 px-6 md:px-16">
         <h2 className="text-3xl font-bold text-center mb-12">Our Achievements</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-          <Counter end={27} label="Years of Experience" />
-          <Counter end={2500} label="Satisfied Clients" />
-          <Counter end={150} label="Projects Completed" />
-          <Counter end={24} label="Awards & Recognitions" />
+          <Counter end={2} label="Years of Experience" />
+          <Counter end={500} label="Satisfied Clients" />
+          <Counter end={200} label="Projects Completed" />
+          <Counter end={10} label="Awards & Recognitions" />
         </div>
       </section>
 

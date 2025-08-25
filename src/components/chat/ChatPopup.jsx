@@ -1,8 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { MessageCircle, X, CheckCircle, AlertCircle } from "lucide-react";
 
-const API_URL = (import.meta.env?.VITE_BACKEND_URL || "https://chatbot-api-c5on.onrender.com") + "/api/chat";
-const LEAD_URL = (import.meta.env?.VITE_BACKEND_URL || "https://chatbot-api-c5on.onrender.com") + "/api/leads";
+const API_URL =
+  (import.meta.env?.VITE_BACKEND_URL || "https://chatbot-api-c5on.onrender.com") +
+  "/api/chat";
+const LEAD_URL =
+  (import.meta.env?.VITE_BACKEND_URL || "https://chatbot-api-c5on.onrender.com") +
+  "/api/leads";
 
 function ChatPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,11 +17,9 @@ function ChatPopup() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [suggestions, setSuggestions] = useState([
-
     "Do you offer training or internships?",
     "Career opportunities at ijekerTech",
     "How can I contact the company?",
-
   ]);
 
   const [awaitingLead, setAwaitingLead] = useState(false);
@@ -27,21 +29,19 @@ function ChatPopup() {
   const endRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Draggable state
   const [position, setPosition] = useState({ bottom: 24, right: 24 });
   const dragRef = useRef(null);
   const offset = useRef({ x: 0, y: 0 });
   const isDragging = useRef(false);
 
+  const abortControllerRef = useRef(null);
+
   useEffect(() => endRef.current?.scrollIntoView({ behavior: "smooth" }), [messages, typing]);
 
-  // Draggable handlers
+  // Draggable
   const handleMouseDown = (e) => {
     isDragging.current = true;
-    offset.current = {
-      x: e.clientX,
-      y: e.clientY,
-    };
+    offset.current = { x: e.clientX, y: e.clientY };
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
   };
@@ -71,7 +71,7 @@ function ChatPopup() {
       {
         id: crypto.randomUUID(),
         from: "bot",
-        text: "👋 Welcome to ijekerTech! Please provide your email or phone so we can assist you better.",
+        text: "Hello Sir! Welcome to ijekerTech! 🎉 Please provide your email or phone so we can assist you better.",
         createdAt: new Date().toISOString(),
       },
     ]);
@@ -92,6 +92,7 @@ function ChatPopup() {
     setAwaitingLead(false);
     setLeadValue("");
     setLeadValid(null);
+    abortControllerRef.current?.abort();
   };
 
   // Lead validation
@@ -127,35 +128,64 @@ function ChatPopup() {
     } catch (err) { console.error("Lead save failed:", err); }
   };
 
+  // Handle sending messages with **realistic typing effect**
   const handleSend = async (presetText) => {
     const text = (presetText ?? input).trim();
     if (!text || busy) return;
-    setBusy(true); setError("");
+
+    // Cancel previous request if any
+    abortControllerRef.current?.abort();
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
+    setBusy(true);
+    setError("");
+
     const userMsg = { id: crypto.randomUUID(), from: "user", text, createdAt: new Date().toISOString() };
     setMessages(prev => [...prev, userMsg]);
     if (!presetText) setInput("");
+
+    setTyping(true);
 
     try {
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ from: "user", text })
+        body: JSON.stringify({ from: "user", text }),
+        signal: controller.signal,
       });
       if (!res.ok) throw new Error(`Server ${res.status}`);
       const data = await res.json();
 
-      setTyping(true);
-      setTimeout(() => {
-        if (data?.botMsg) setMessages(prev => [...prev, { id: crypto.randomUUID(), ...data.botMsg, createdAt: new Date().toISOString() }]);
-        setSuggestions(data?.suggestions?.length ? data.suggestions : ["What services do you offer?", "Pricing plans", "Talk to support"]);
-        setTyping(false); setBusy(false);
-      }, 600);
-    } catch (err) { console.error(err); setTyping(false); setBusy(false); setError("⚠️ Connection issue. Try again."); }
+      if (data?.botMsg) {
+        // Create empty bot message
+        const botMsg = { id: crypto.randomUUID(), from: "bot", text: "", createdAt: new Date().toISOString() };
+        setMessages(prev => [...prev, botMsg]);
+
+        // Typing effect: add characters one by one
+        const fullText = data.botMsg.text;
+        let i = 0;
+        const speed = Math.min(50, 2000 / fullText.length); // dynamic typing speed
+        const interval = setInterval(() => {
+          i++;
+          setMessages(prev => prev.map(m => m.id === botMsg.id ? { ...m, text: fullText.slice(0, i) } : m));
+          if (i >= fullText.length) clearInterval(interval);
+        }, speed);
+      }
+
+      setSuggestions(data?.suggestions?.length ? data.suggestions : ["What services do you offer?", "Pricing plans", "Talk to support"]);
+
+    } catch (err) {
+      if (err.name !== "AbortError") setError("⚠️ Connection issue. Try again.");
+      console.error(err);
+    } finally {
+      setTyping(false);
+      setBusy(false);
+    }
   };
 
   const canSend = useMemo(() => input.trim().length > 0 && !busy, [input, busy]);
 
-  // Enter key handler
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -174,7 +204,6 @@ function ChatPopup() {
     >
       {isOpen ? (
         <div className={panelClass}>
-          {/* Header */}
           <div className="flex items-center justify-between px-5 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-3xl shadow-md">
             <h2 className="text-sm font-semibold flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-green-300 animate-pulse" /> ijekerTech Assistant
@@ -184,7 +213,6 @@ function ChatPopup() {
 
           {error && <div className="flex items-center gap-2 px-3 py-2 text-xs text-red-700 bg-red-50 border-b border-red-100 animate-pulse"><AlertCircle size={14} /> {error}</div>}
 
-          {/* Messages */}
           <div className="flex-1 px-4 py-3 overflow-y-auto space-y-4 text-sm bg-gradient-to-b from-white to-slate-50 scroll-smooth">
             {messages.map((m) => <Bubble key={m.id} msg={m} />)}
             {typing && <TypingIndicator />}
@@ -209,13 +237,11 @@ function ChatPopup() {
             </div>
           ) : (
             <>
-              {/* Suggestions */}
               {suggestions.length > 0 && (
                 <div className="px-3 pb-2 flex gap-2 flex-wrap">
                   {suggestions.map((s, i) => <button key={i} onClick={() => handleSend(s)} className="px-3 py-1.5 text-xs rounded-full bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 text-blue-700 border border-blue-100 shadow-sm transition transform hover:scale-105">{s}</button>)}
                 </div>
               )}
-              {/* Input */}
               <div className="border-t bg-white rounded-b-3xl p-2 flex items-end gap-2">
                 <textarea
                   ref={inputRef}
@@ -255,12 +281,10 @@ function Bubble({ msg }) {
   );
 }
 
-// Avatar
 function Avatar({ who }) {
   return <div className={`grid place-items-center h-8 w-8 rounded-full text-[10px] font-semibold ${who === "user" ? "bg-blue-600 text-white shadow-md" : "bg-gray-200 text-gray-700 shadow-sm"}`}>{who === "user" ? "U" : "B"}</div>;
 }
 
-// Typing Indicator
 function TypingIndicator() {
   return (
     <div className="flex items-center gap-2 animate-fadeIn">

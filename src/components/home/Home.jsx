@@ -39,7 +39,7 @@ const scaleIn = {
 const slides = [
   {
     id: 1,
-    image: "/img2.jpg",
+    image: "/head.jpg",
     title: "Best Solution To Run Your Project Faster",
     description:
       "Grursus suada faci Lorem ipsum dolarorit ametion consectetur elit. Vesti at bulum nec odio aea the dumm ipsumm and fadolorit to the consectetur dummy text elit.",
@@ -48,7 +48,7 @@ const slides = [
   },
   {
     id: 2,
-    image: "/img3.jpg",
+    image: "/head1.jpg",
     title: "Innovative Ideas For Modern IT Solutions",
     description:
       "Accelerate your digital transformation journey with our cutting-edge strategies and modern technologies.",
@@ -57,7 +57,7 @@ const slides = [
   },
   {
     id: 3,
-    image: "/img4.jpg",
+    image: "/head2.jpg",
     title: "Empowering Your Business Through Tech",
     description:
       "We deliver IT solutions that fuel productivity, performance, and profitability for your company.",
@@ -121,9 +121,9 @@ const team = [
     image: "/man.png",
   },
   {
-    name: "Sonam Yadav",
-    role: "Lead Designer",
-    bio: "Creates beautiful and functional user experiences.",
+    name: "Sonali Verma",
+    role: "Accountant",
+    bio: "Manages financial records and ensures compliance with regulations.",
     image: "/woman.png",
   },
   {
@@ -247,12 +247,12 @@ const Home = () => {
               We Promise High Quality IT Solutions
             </h2>
             <p className="text-gray-500 text-xl mt-4">
-              Over <span className="text-blue-600 font-semibold">2,500+</span>{" "}
+              Over <span className="text-blue-600 font-semibold">500+</span>{" "}
               Customers
             </p>
             <div className="w-20 h-[2px] bg-blue-600 mt-4"></div>
             <p className="text-gray-600 mt-6 leading-relaxed">
-              We deliver innovative IT solutions with over 5+ years of industry
+              We deliver innovative IT solutions with over 2+ years of industry
               experience. From startups to enterprises, our focus remains on
               performance, reliability, and customer success.
             </p>
@@ -368,7 +368,7 @@ const Home = () => {
                   boxShadow: "0 15px 35px rgba(0,0,0,0.15)",
                 }}
                 onClick={() =>
-                  navigate(`/team/${member.name.replace(/\s+/g, "-").toLowerCase()}`)
+                  navigate(`/company/our-team`)
                 }
                 className="cursor-pointer bg-white border border-gray-200 rounded-lg shadow-md transition p-6 text-center"
               >
