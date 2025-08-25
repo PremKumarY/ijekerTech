@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import FooterBanner from "../footer/FooterBanner";
 import { Lightbulb, Users, Target, Award } from "lucide-react";
-import { FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaLinkedin,FaInstagram, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function OurTeam() {
@@ -11,34 +11,38 @@ function OurTeam() {
     {
       name: "Prem Kumar Yadav",
       role: "Founder & CEO",
-      bio: "Leads ijekerTech with a vision for innovative AI and IT solutions.",
+      bio: "Leads ijekerTech with a vision for innovative AI and IT solutions. And drives the company's strategic direction.",
       image: "/man.png",
       linkedin: "https://www.linkedin.com/in/prem-kumar-yadav-15a06a208/",
+      instagram: "https://www.instagram.com/prem__kumar__yadav_/",
       twitter: "https://x.com/PremKumarY_",
     },
     {
       name: "Nitesh Gupta",
       role: "CTO",
-      bio: "Oversees technology strategy and drives product development.",
+      bio: "Oversees technology strategy and drives product development. A tech visionary with a passion for innovation.",
       image: "/man.png",
       linkedin: "https://www.linkedin.com/in/nitesh-gupta-06b397208/",
+      instagram: "https://www.instagram.com/nitesh__gupta___/",
       twitter: "https://x.com/niteshg31466509",
  
     },
     {
-      name: "Sonam Yadav",
-      role: "Lead Designer",
-      bio: "Creates beautiful and functional user experiences.",
+      name: "Sonali Verma",
+      role: "Accountant & Financial",
+      bio: "Manages Accounting and Financial Operations. A detail-oriented professional with a passion for numbers.",
       image: "/woman.png",
-      linkedin: "https://www.linkedin.com/company/ijekertech/posts/?feedView=all",
-      twitter: "https://x.com/ijekertech",
+      linkedin: "https://www.linkedin.com/in/sonali-kumari-1a8055273/",
+      instagram: "https://www.instagram.com/shaluverma_25/",
+      twitter: "https://x.com/SonaliVerma",
     },
     {
       name: "Dhananjay Kushwaha",
       role: "HR Manager",
-      bio: "Builds intelligent systems and machine learning models.",
+      bio: "Leads HR initiatives and fosters a positive workplace culture. Committed to employee growth and organizational success.",
       image: "/man.png",
       linkedin: "https://www.linkedin.com/in/dhananjay-kushwaha-07b556328/",
+      instagram: "https://www.instagram.com/dhananjay_kush07/",
       twitter: "https://x.com/Dk_Dhananjay2",
     },
   ];
@@ -77,7 +81,7 @@ function OurTeam() {
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-pink-600 to-red-700 text-white py-20 px-6 text-center relative overflow-hidden">
           <motion.h1
-            className="text-5xl font-extrabold mb-6 drop-shadow-lg"
+            className="text-5xl font-serif font-extrabold mb-6 drop-shadow-lg"
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -146,14 +150,14 @@ function OurTeam() {
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="w-28 h-28 rounded-full object-cover border-4 border-pink-500 shadow-lg"
+                      className="w-28 h-28 rounded-full object-cover border-4 border-pink-500 shadow-lg "
                     />
                     <span className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></span>
                   </div>
 
-                  <h3 className="text-xl font-semibold text-gray-800">{member.name}</h3>
+                  <h3 className="text-xl font-semibold text-gray-800 italic hover:font-serif">{member.name}</h3>
                   <p className="text-sm text-pink-600 font-medium mb-3">{member.role}</p>
-                  <p className="mt-3 text-gray-600 text-sm leading-relaxed">{member.bio}</p>
+                  <p className="mt-3 text-gray-600 text-sm leading-relaxed font-serif">{member.bio}</p>
 
                   <div className="flex justify-center mt-5 gap-4 opacity-0 group-hover:opacity-100 transition">
                     <a
@@ -163,6 +167,14 @@ function OurTeam() {
                       className="text-gray-500 hover:text-pink-600 transition text-xl"
                     >
                       <FaLinkedin />
+                    </a>
+                    <a
+                      href={member.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-500 hover:text-pink-600 transition text-xl"
+                    >
+                      <FaInstagram />
                     </a>
                     <a
                       href={member.twitter}

@@ -121,9 +121,9 @@ const team = [
     image: "/man.png",
   },
   {
-    name: "Sonam Yadav",
-    role: "Lead Designer",
-    bio: "Creates beautiful and functional user experiences.",
+    name: "Sonali Verma",
+    role: "Accountant",
+    bio: "Manages financial records and ensures compliance with regulations.",
     image: "/woman.png",
   },
   {
