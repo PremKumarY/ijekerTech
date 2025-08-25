@@ -3,9 +3,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import FooterBanner from "../footer/FooterBanner";
 import { Users, Cpu, Globe, Rocket, ShieldCheck, Zap } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function AboutUs() {
+  const navigate = useNavigate();
   const stats = [
     { icon: <Users size={40} className="text-blue-600" />, label: "Clients Served", value: "120+" },
     { icon: <Cpu size={40} className="text-blue-600" />, label: "AI Models Built", value: "50+" },
@@ -94,7 +95,7 @@ function AboutUs() {
             transition={{ duration: 0.8 }}
           >
             <img
-              src="/img2.jpg"
+              src="/who i.jpg"
               alt="About Us"
               className="rounded-2xl shadow-xl w-full max-w-md hover:scale-105 transition-transform duration-500"
             />
@@ -166,6 +167,7 @@ function AboutUs() {
             Partner with ijekerTech and let’s turn your ideas into powerful digital solutions.
           </motion.p>
           <motion.button
+            onClick={() => navigate("/contact")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-yellow-400 text-gray-900 px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-yellow-300 transition"
