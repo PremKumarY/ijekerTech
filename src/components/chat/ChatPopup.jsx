@@ -2,10 +2,10 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { MessageCircle, X, CheckCircle, AlertCircle } from "lucide-react";
 
 const API_URL =
-  (import.meta.env?.VITE_BACKEND_URL || "https://chatbot-api-c5on.onrender.com") +
+  (import.meta.env?.VITE_BACKEND_URL || "https://chatbot-api-7hjs.onrender.com") +
   "/api/chat";
 const LEAD_URL =
-  (import.meta.env?.VITE_BACKEND_URL || "https://chatbot-api-c5on.onrender.com") +
+  (import.meta.env?.VITE_BACKEND_URL || "https://chatbot-api-7hjs.onrender.com") +
   "/api/leads";
 
 
