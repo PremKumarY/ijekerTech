@@ -89,9 +89,9 @@ function ChatPopup() {
     setInput("");
     setSuggestions([
       "about ijekerTech",
-    "ijekerTech services",
-    "courses",
-    "what can this chatbot answer?"
+      "ijekerTech services",
+      "courses",
+      "what can this chatbot answer?"
     ]);
     setAwaitingLead(false);
     setLeadValue("");
@@ -182,10 +182,10 @@ function ChatPopup() {
         }, speed);
       }
 
-      setSuggestions(data?.suggestions?.length ? data.suggestions : ["What services do you offer?", "Pricing plans", "Talk to support"]);
+      setSuggestions(data?.suggestions?.length ? data.suggestions : ["about ijekerTech","ijekerTech services","courses","what can this chatbot answer?"]);
 
     } catch (err) {
-      if (err.name !== "AbortError") setError("⚠️ Connection issue. Try again.");
+      if (err.name !== "AbortError") setError("⚠️ Connection issue. Try again later.");
       console.error(err);
     } finally {
       setTyping(false);
@@ -296,14 +296,15 @@ function Avatar({ who }) {
 
 function TypingIndicator() {
   return (
-    <div className="flex items-center gap-2 animate-fadeIn">
-      <Avatar who="bot" />
-      <div className="flex gap-1 px-3 py-2 rounded-2xl bg-gray-100 shadow-inner">
-        <span className="w-2 h-2 bg-gray-500 rounded-full animate-bounce.delay-75"></span>
-        <span className="w-2 h-2 bg-gray-500 rounded-full animate-bounce.delay-150"></span>
-        <span className="w-2 h-2 bg-gray-500 rounded-full animate-bounce.delay-300"></span>
-      </div>
-    </div>
+   <div className="flex items-center gap-2 animate-fadeIn">
+  <Avatar who="bot" />
+  <div className="flex gap-1 px-3 py-2 rounded-2xl bg-gray-100 shadow-inner">
+    <span className="w-2 h-2 bg-gray-500 rounded-full animate-typing-bounce [animation-delay:0ms]"></span>
+    <span className="w-2 h-2 bg-gray-500 rounded-full animate-typing-bounce [animation-delay:200ms]"></span>
+    <span className="w-2 h-2 bg-gray-500 rounded-full animate-typing-bounce [animation-delay:400ms]"></span>
+  </div>
+</div>
+
   );
 }
 
