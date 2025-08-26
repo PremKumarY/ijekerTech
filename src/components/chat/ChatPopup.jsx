@@ -8,6 +8,8 @@ const LEAD_URL =
   (import.meta.env?.VITE_BACKEND_URL || "https://chatbot-api-c5on.onrender.com") +
   "/api/leads";
 
+
+
 function ChatPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [unread, setUnread] = useState(0);
@@ -17,9 +19,10 @@ function ChatPopup() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [suggestions, setSuggestions] = useState([
-    "Do you offer training or internships?",
-    "Career opportunities at ijekerTech",
-    "How can I contact the company?",
+    "about ijekerTech",
+    "ijekerTech services",
+    "courses ",
+    "what can this chatbot answer?"
   ]);
 
   const [awaitingLead, setAwaitingLead] = useState(false);
@@ -85,9 +88,10 @@ function ChatPopup() {
     setBusy(false);
     setInput("");
     setSuggestions([
-      "Do you offer training or internships?",
-      "Career opportunities at ijekerTech",
-      "How can I contact the company?",
+      "about ijekerTech",
+    "ijekerTech services",
+    "courses",
+    "what can this chatbot answer?"
     ]);
     setAwaitingLead(false);
     setLeadValue("");
@@ -151,7 +155,12 @@ function ChatPopup() {
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ from: "user", text }),
+        body: JSON.stringify({
+          email: leadValue,  // ✅ include user’s email/phone
+          from: "user",
+          text
+        }),
+
         signal: controller.signal,
       });
       if (!res.ok) throw new Error(`Server ${res.status}`);
