@@ -13,7 +13,7 @@ function Faq() {
     {
       question: "How can I apply for a job?",
       answer:
-        "You can apply directly through our Careers page or send your CV to hr.apanatime@gmail.com."
+        "You can apply directly through our Careers page or send your CV to ijekertech@gmail.com."
     },
     {
       question: "Do you offer remote work?",

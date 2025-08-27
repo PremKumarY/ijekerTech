@@ -26,6 +26,15 @@ function Dashboard({ userDetails, trainingDetails, certificates, setActivePage }
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
+      {/* Notice Banner */}
+      <div className="bg-gray-100 text-yellow-800 p-4 rounded-lg mb-6 border border-yellow-500 blinking text-center animate-pulse hover:bg-yellow-200">
+        ⚠️ This application is currently <b>inactive</b>.
+        <span className="ml-2">Please check back later.</span>
+        <span className="ml-2">Thank you for your understanding.</span>
+        <span className="ml-2">We are working hard to bring it back online.</span>
+        <span className="ml-2">Stay tuned for updates!</span>
+        <span className="ml-2 text-blue-800">Work in progress...</span>
+      </div>
       {/* Welcome */}
       <header className="mb-6 flex items-center justify-between">
         <div className="flex items-center gap-4">

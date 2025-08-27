@@ -60,8 +60,9 @@ const Navbar = () => {
   return (
     <>
       {/* Alert Banner */}
-      <div className="bg-yellow-500 text-black text-center py-2 text-sm font-semibold">
-        🚧 This website is under process. Some features may not work yet.🚧
+      <div className="text-red-500  text-center py-2 text-sm font-semibold animate-pulse">
+       welcome to ijekerTech - Your Trusted IT Solutions Partner!
+       <hr />
       </div>
 
       <div className="sticky top-0 z-50 shadow-md bg-white border-b">
@@ -282,7 +283,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/contact"
-                  className="block px-6 py-3 hover:bg-gray-100"
+                  className="block px-6 py-3 border-b hover:bg-gray-100"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Contact
@@ -291,7 +292,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/cms/cms-page"
-                  className="block px-6 py-3 hover:bg-gray-100"
+                  className="block px-6 border-b py-3 hover:bg-gray-100"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   CMS
@@ -300,7 +301,7 @@ const Navbar = () => {
             </ul>
 
             {/* Mobile Account Section */}
-            <div className="relative ">
+            <div className="relative px-4 py-3">
               {isLoggedIn ? (
                 <div className="relative">
                   <button
@@ -317,7 +318,7 @@ const Navbar = () => {
                   </button>
 
                   {dropdownOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
+                    <div className="absolute  mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
                       <ul className="py-2 text-sm text-gray-700">
                         <Link
                           to="cms/account/profile"

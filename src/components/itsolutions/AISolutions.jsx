@@ -118,6 +118,98 @@ function AISolutions() {
           })}
         </div>
       </div>
+      {/* AI / ML Frameworks */}
+      <section className="py-16 max-w-7xl mx-auto px-6">
+        <motion.h2
+          className="text-3xl font-bold text-center mb-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          Technologies We Use
+        </motion.h2>
+
+        {/* Front-end */}
+        <div className="mb-8">
+          <h3 className="text-xl font-semibold mb-4 text-center">Front-end</h3>
+          <div className="flex flex-wrap justify-center gap-6">
+            {["React", "Next.js", "Tailwind CSS", "HTML5", "CSS3", "JavaScript"].map((tech, idx) => (
+              <motion.div
+                key={idx}
+                className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+              >
+                {tech}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Back-end */}
+        <div className="mb-8">
+          <h3 className="text-xl font-semibold mb-4 text-center">Back-end</h3>
+          <div className="flex flex-wrap justify-center gap-6">
+            {["Node.js", "Express.js", "Django", "FastAPI"].map((tech, idx) => (
+              <motion.div
+                key={idx}
+                className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+              >
+                {tech}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* AI / ML Frameworks */}
+        <div className="mb-8">
+          <h3 className="text-xl font-semibold mb-4 text-center">AI / ML Frameworks</h3>
+          <div className="flex flex-wrap justify-center gap-6">
+            {["TensorFlow", "PyTorch", "scikit-learn", "Keras", "Hugging Face Transformers", "OpenAI API", "LangChain"].map((tech, idx) => (
+              <motion.div
+                key={idx}
+                className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+              >
+                {tech}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Database & Storage */}
+        <div className="mb-8">
+          <h3 className="text-xl font-semibold mb-4 text-center">Database & Storage</h3>
+          <div className="flex flex-wrap justify-center gap-6">
+            {["MongoDB", "PostgreSQL", "Firebase", "Redis", "S3 / Cloud Storage"].map((tech, idx) => (
+              <motion.div
+                key={idx}
+                className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+              >
+                {tech}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tools & Deployment */}
+        <div>
+          <h3 className="text-xl font-semibold mb-4 text-center">Tools & Deployment</h3>
+          <div className="flex flex-wrap justify-center gap-6">
+            {["Git & GitHub", "Docker", "Jupyter Notebook", "VS Code", "Vercel", "Render", "Postman"].map((tech, idx) => (
+              <motion.div
+                key={idx}
+                className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+              >
+                {tech}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* Call to Action */}
       <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 py-20 text-center text-white px-2 rounded-t-3xl overflow-hidden">
