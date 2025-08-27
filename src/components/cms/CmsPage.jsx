@@ -72,7 +72,7 @@ function CmsPage() {
       </nav>
 
         {/* Notice Banner */}
-        <div className="bg-gray-100 text-yellow-800 p-4 rounded-lg mb-6 border border-yellow-500 blinking text-center">
+        <div className="bg-gray-100 text-yellow-800 p-4 rounded-lg mb-6 border border-yellow-500 blinking text-center animate-pulse hover:bg-yellow-200">
           ⚠️ This application is currently <b>inactive</b>.
           <span className="ml-2">Please check back later.</span>
           <span className="ml-2">Thank you for your understanding.</span>

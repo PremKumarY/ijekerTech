@@ -202,13 +202,13 @@ function ChatPopup() {
     }
   };
 
-  const panelClass = "bg-white shadow-2xl rounded-3xl border flex flex-col max-h-[80vh] sm:max-h-[70vh] w-[min(92vw,28rem)] sm:w-96";
+  const panelClass = "bg-white shadow-2xl rounded-3xl border flex flex-col max-h-[80vh] sm:max-h-[70vh] w-[min(92vw,28rem)] sm:w-96 h-[40vh] sm:h-[60vh] overflow-hidden";
 
   return (
     <div
       ref={dragRef}
       onMouseDown={handleMouseDown}
-      className="z-50 font-sans cursor-grab"
+      className="z-50 font-sans cursor-grab "
       style={{ position: "fixed", bottom: position.bottom, right: position.right }}
     >
       {isOpen ? (
