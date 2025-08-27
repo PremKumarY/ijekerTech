@@ -1,6 +1,6 @@
 import React from "react";
 import FooterBanner from "../footer/FooterBanner";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaMobileAlt, FaCode, FaCloud, FaRobot, FaServer, FaDatabase, FaLock } from "react-icons/fa";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
@@ -48,14 +48,14 @@ function AppDevelopment() {
           transition={{ duration: 1.5, repeat: Infinity, repeatType: "mirror" }}
         />
       </section>
-       {/* Breadcrumb */}
-        <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
-          <Link to="/" className="hover:text-purple-600 font-medium">
-            Home
-          </Link>{" "}
-          /{" "}
-          <span className="text-gray-500"> IT Solution / App Development</span>
-        </nav>
+      {/* Breadcrumb */}
+      <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
+        <Link to="/" className="hover:text-purple-600 font-medium">
+          Home
+        </Link>{" "}
+        /{" "}
+        <span className="text-gray-500"> IT Solution / App Development</span>
+      </nav>
 
       {/* Services Grid */}
       <div className="bg-gray-50 py-20 px-6 lg:px-20">
@@ -63,8 +63,8 @@ function AppDevelopment() {
           {services.map((service, idx) => (
             <motion.div
               key={idx}
-             className="group bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 hover:shadow-xl transition transform hover:-translate-y-2"
-               initial="offscreen"
+              className="group bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-lg border border-gray-100 hover:border-blue-200 hover:shadow-xl transition transform hover:-translate-y-2"
+              initial="offscreen"
               whileInView="onscreen"
               viewport={{ once: true, amount: 0.3 }}
               variants={cardVariants}
@@ -79,6 +79,81 @@ function AppDevelopment() {
           ))}
         </div>
       </div>
+      <section className="py-16 max-w-7xl mx-auto px-6">
+        <motion.h2
+          className="text-3xl font-bold text-center mb-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          Technologies We Use
+        </motion.h2>
+
+        {/* Front-end / Mobile */}
+        <div className="mb-8">
+          <h3 className="text-xl font-semibold mb-4 text-center">Front-end / Mobile</h3>
+          <div className="flex flex-wrap justify-center gap-6">
+            {["React", "Next.js", "Tailwind CSS", "Flutter", "React Native", "Swift", "Kotlin"].map((tech, idx) => (
+              <motion.div
+                key={idx}
+                className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+              >
+                {tech}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Back-end */}
+        <div className="mb-8">
+          <h3 className="text-xl font-semibold mb-4 text-center">Back-end</h3>
+          <div className="flex flex-wrap justify-center gap-6">
+            {["Node.js", "Express.js", "Django", "FastAPI", "Firebase Functions"].map((tech, idx) => (
+              <motion.div
+                key={idx}
+                className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+              >
+                {tech}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Database & Storage */}
+        <div className="mb-8">
+          <h3 className="text-xl font-semibold mb-4 text-center">Database & Storage</h3>
+          <div className="flex flex-wrap justify-center gap-6">
+            {["MongoDB", "PostgreSQL", "Firebase Realtime DB", "SQLite", "Redis", "S3 / Cloud Storage"].map((tech, idx) => (
+              <motion.div
+                key={idx}
+                className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+              >
+                {tech}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tools & Deployment */}
+        <div>
+          <h3 className="text-xl font-semibold mb-4 text-center">Tools & Deployment</h3>
+          <div className="flex flex-wrap justify-center gap-6">
+            {["Git & GitHub", "Docker", "Vercel", "Render", "Postman", "Xcode", "Android Studio"].map((tech, idx) => (
+              <motion.div
+                key={idx}
+                className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+              >
+                {tech}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* Call To Action */}
       <section className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16 text-center rounded-t-3xl relative overflow-hidden">

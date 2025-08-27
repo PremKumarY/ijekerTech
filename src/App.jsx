@@ -23,7 +23,6 @@ import Internship from './components/cms/Internship'
 import InternshipPage from './components/cms/Register'
 import Profile from './components/cms/account/Profile'
 import Settings from './components/cms/account/Settings'
-import Dashboard from './components/cms/account/Dashboard'
 import CoursesLandingPage from './components/cms/courses/CoursesLandingPage'
 import Register from './components/cms/Register'
 
@@ -53,7 +52,6 @@ function App() {
             <Route path="apply-internship" element={<InternshipPage />} />
             <Route path="cms/account/settings" element={<Settings />} />
             <Route path="cms/account/profile" element={<Profile />} />
-            <Route path="cms/account/profile/dashboard" element={<Dashboard />} />
             <Route path="*" element={<NoPage />} />
             <Route path="/register" element={<Register />} />
             <Route path="cms/cms-page/courses/courseslandingpage" element={<CoursesLandingPage />} />

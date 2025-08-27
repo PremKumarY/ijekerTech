@@ -174,34 +174,4 @@ export const blogPosts = [
       of digital transformation strategies.
     `,
   },
-  {
-    id: 11,
-    title: "Machine Learning Trends in 2025",
-    date: "August 28, 2025",
-    author: "Prem Kumar Yadav",
-    excerpt:
-      "Machine Learning is evolving rapidly. Here are the trends to watch...",
-    image:
-      "https://images.unsplash.com/photo-1534759846116-5799c33ce22a?auto=format&fit=crop&w=900&q=80",
-    content: `
-      Machine Learning is becoming more accessible with AutoML tools. 
-      In 2025, we expect to see advancements in unsupervised learning, 
-      federated learning, and ethical AI practices.
-    `,
-  },
-  {
-    id: 12,
-    title: "The Role of Data Science in Modern Businesses",
-    date: "August 28, 2025",
-    author: "Prem Kumar Yadav",
-    excerpt:
-      "Data Science is no longer a buzzword. It’s driving business transformation...",
-    image:
-      "https://images.unsplash.com/photo-1534759846116-5799c33ce22a?auto=format&fit=crop&w=900&q=80",
-    content: `
-      Data Science enables businesses to make smarter decisions through 
-      data-driven insights. In 2025, AI + Data Science is becoming the backbone 
-      of digital transformation strategies.
-    `,
-  },
 ];

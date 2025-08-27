@@ -1,6 +1,6 @@
 import React from 'react';
 import FooterBanner from '../footer/FooterBanner';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
@@ -38,7 +38,7 @@ function WebDevelopment() {
             We build fast, secure, and scalable websites that bring your ideas to life and help your business grow.
           </motion.p>
         </section>
- {/* Breadcrumb */}
+        {/* Breadcrumb */}
         <nav className="max-w-6xl mx-auto px-4 py-3 text-sm text-gray-600">
           <Link to="/" className="hover:text-purple-600 font-medium">
             Home
@@ -89,21 +89,98 @@ function WebDevelopment() {
         </section>
 
         {/* Technologies Section */}
-        <section className="py-16 max-w-7xl mx-auto px-6">
-          <motion.h2 className="text-3xl font-bold text-center mb-12"
-            initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-            Technologies We Use
-          </motion.h2>
-          <div className="flex flex-wrap justify-center gap-6">
-            {["React", "Next.js", "Node.js", "Tailwind CSS", "MongoDB", "WordPress"].map((tech, idx) => (
-              <motion.div key={idx}
-                className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
-                whileHover={{ scale: 1.1 }}>
-                {tech}
-              </motion.div>
-            ))}
-          </div>
-        </section>
+       <section className="py-16 max-w-7xl mx-auto px-6">
+  <motion.h2 
+    className="text-3xl font-bold text-center mb-12"
+    initial={{ opacity: 0 }} 
+    whileInView={{ opacity: 1 }} 
+    viewport={{ once: true }}
+  >
+    Technologies We Use
+  </motion.h2>
+
+  {/* Front-end */}
+  <div className="mb-8">
+    <h3 className="text-xl font-semibold mb-4 text-center">Front-end</h3>
+    <div className="flex flex-wrap justify-center gap-6">
+      {["React", "Next.js", "Tailwind CSS", "HTML5", "CSS3", "JavaScript", "TypeScript"].map((tech, idx) => (
+        <motion.div 
+          key={idx}
+          className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+        >
+          {tech}
+        </motion.div>
+      ))}
+    </div>
+  </div>
+
+  {/* Back-end */}
+  <div className="mb-8">
+    <h3 className="text-xl font-semibold mb-4 text-center">Back-end</h3>
+    <div className="flex flex-wrap justify-center gap-6">
+      {["Node.js", "Express.js", "Django", "FastAPI"].map((tech, idx) => (
+        <motion.div 
+          key={idx}
+          className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+        >
+          {tech}
+        </motion.div>
+      ))}
+    </div>
+  </div>
+
+  {/* Database */}
+  <div className="mb-8">
+    <h3 className="text-xl font-semibold mb-4 text-center">Database</h3>
+    <div className="flex flex-wrap justify-center gap-6">
+      {["MongoDB", "PostgreSQL", "MySQL", "Redis"].map((tech, idx) => (
+        <motion.div 
+          key={idx}
+          className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+        >
+          {tech}
+        </motion.div>
+      ))}
+    </div>
+  </div>
+
+  {/* CMS */}
+  <div className="mb-8">
+    <h3 className="text-xl font-semibold mb-4 text-center">CMS / Full-stack</h3>
+    <div className="flex flex-wrap justify-center gap-6">
+      {["WordPress", "MERN Stack"].map((tech, idx) => (
+        <motion.div 
+          key={idx}
+          className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+        >
+          {tech}
+        </motion.div>
+      ))}
+    </div>
+  </div>
+
+  {/* Tools & Deployment */}
+  <div>
+    <h3 className="text-xl font-semibold mb-4 text-center">Tools & Deployment</h3>
+    <div className="flex flex-wrap justify-center gap-6">
+      {["Git & GitHub", "Docker", "Vercel", "Netlify", "Render", "Postman"].map((tech, idx) => (
+        <motion.div 
+          key={idx}
+          className="bg-white shadow-md px-6 py-3 rounded-full border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-transform duration-300 cursor-pointer"
+          whileHover={{ scale: 1.1 }}
+        >
+          {tech}
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
 
         {/* CTA Section */}
         <section className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-12 text-center rounded-t-3xl">
