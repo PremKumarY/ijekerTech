@@ -202,7 +202,7 @@ function ChatPopup() {
     }
   };
 
-  const panelClass = "bg-white shadow-2xl rounded-3xl border flex flex-col max-h-[80vh] sm:max-h-[70vh] w-[min(92vw,28rem)] sm:w-96 h-[40vh] sm:h-[60vh] overflow-hidden";
+  const panelClass = "bg-white shadow-2xl rounded-3xl border flex flex-col max-h-[80vh] sm:max-h-[70vh] w-[min(92vw,28rem)] sm:w-96 h-[60vh] sm:h-[50vh] overflow-hidden";
 
   return (
     <div

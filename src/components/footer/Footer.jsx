@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import {
   FaFacebook,
-  FaGithub,
   FaInstagram,
   FaLinkedinIn,
   FaXTwitter,
+  FaYoutube,
 } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
+
 
 export default function Footer() {
   useEffect(() => {
@@ -31,9 +32,9 @@ export default function Footer() {
             </p>
             <div className="flex justify-center md:justify-start gap-5 text-2xl mt-5">
               {[{
-                href: "https://github.com/ijekertech",
-                icon: <FaGithub />,
-                hover: "hover:text-green-500"
+                href: "https://www.youtube.com/@ijekerTech",
+                icon: <FaYoutube/>,
+                hover: "hover:text-red-500"
               }, {
                 href: "https://facebook.com/profile.php?id=61579048111215",
                 icon: <FaFacebook />,
@@ -75,12 +76,12 @@ export default function Footer() {
                     text === "Home"
                       ? "/"
                       : text === "About Us"
-                      ? "company/about"
-                      : text === "Blog"
-                      ? "blog/BlogPage"
-                      : text === "Portfolio"
-                      ? "portfolio"
-                      : "/contact"
+                        ? "company/about"
+                        : text === "Blog"
+                          ? "blog/BlogPage"
+                          : text === "Portfolio"
+                            ? "portfolio"
+                            : "/contact"
                   }
                   className="text-gray-600 relative hover:text-gray-900 hover:font-semibold transition-all duration-300 before:absolute before:-bottom-1 before:left-0 before:h-0.5 before:w-0 before:bg-blue-500 hover:before:w-full"
                 >
@@ -115,7 +116,7 @@ export default function Footer() {
           <div data-aos="fade-up" data-aos-delay="300">
             <h2 className="font-semibold text-lg mb-4 text-gray-900">Contact Us</h2>
             <p className="text-gray-600 mb-2 hover:text-gray-900 hover:font-medium transition duration-300">
-               Padrauna, Kushinagar, Uttar Pradesh, India
+              Padrauna, Kushinagar, Uttar Pradesh, India
             </p>
             <p className="text-gray-600 mb-2 hover:text-gray-900 hover:font-medium transition duration-300">
               Email: <a href="mailto:info@ijekertech.com" className="hover:underline">info@ijekertech.com</a>
