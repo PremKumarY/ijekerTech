@@ -8,6 +8,9 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
   FaArrowDown,
+  FaFacebook,
+  FaInstagram,
+  FaYoutube,
 } from "react-icons/fa";
 import FooterBanner from "../footer/FooterBanner";
 import { Link } from "react-router-dom";
@@ -187,17 +190,17 @@ const Contact = () => {
               Contact Info
             </h3>
             <a
-              href="tel:+911234567890"
+              href="tel:+91-6392554947"
               className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition"
             >
-              <FaPhoneAlt className="text-blue-600" /> <span>+91 12345 67890</span>
+              <FaPhoneAlt className="text-blue-600" /> <span>+91 6392554947</span>
             </a>
             <a
-              href="mailto:ijekerTech@gmail.com"
+              href="mailto:ijekertech@gmail.com"
               className="flex items-center gap-3 text-gray-700 hover:text-blue-600 transition"
             >
               <FaEnvelope className="text-blue-600" />{" "}
-              <span>ijekerTech@gmail.com</span>
+              <span>ijekertech@gmail.com</span>
             </a>
             <div className="flex items-center gap-3 text-gray-700">
               <FaMapMarkerAlt className="text-blue-600" />{" "}
@@ -205,7 +208,7 @@ const Contact = () => {
             </div>
             <div className="flex items-center gap-4 mt-3">
               <a
-                href="https://www.linkedin.com/in/prem-kumar-yadav"
+                href="https://www.linkedin.com/company/ijekertech/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-700 hover:text-blue-600 transition"
@@ -213,12 +216,36 @@ const Contact = () => {
                 <FaLinkedin size={24} />
               </a>
               <a
-                href="https://twitter.com/prem_kumar_yadav"
+                href="https://x.com/ijekertech"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-700 hover:text-blue-400 transition"
               >
                 <FaTwitter size={24} />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61579048111215"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-blue-400 transition"
+              >
+                <FaFacebook size={24} />
+              </a>
+              <a
+                href="https://www.instagram.com/ijekertech/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-red-400 transition"
+              >
+                <FaInstagram size={24} />
+              </a>
+              <a
+                href="https://www.instagram.com/ijekertech/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-red-400 transition"
+              >
+                <FaYoutube size={24} />
               </a>
             </div>
           </div>

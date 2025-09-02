@@ -4,6 +4,7 @@ import NavbarBanner from '../navbar/NavbarBanner'
 import Navbar from '../navbar/Navbar'
 import Footer from '../footer/Footer'
 import ChatPopup from '../chat/ChatPopup'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 
 
 function Layout() {
@@ -14,10 +15,10 @@ function Layout() {
       <main className="flex-grow">
         <Outlet />
       </main>
-
       <ChatPopup />
-
       <Footer />
+      {/* Speed Insights panel */}
+      <SpeedInsights />
     </div>
   )
 }

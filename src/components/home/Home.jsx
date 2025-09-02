@@ -72,37 +72,37 @@ const services = [
     icon: <Pencil className="w-10 h-10 text-blue-500" />,
     title: "IT Design",
     desc: "Creative design solutions tailored to your IT needs, ensuring both usability and aesthetics.",
-    link: "/services/it-design",
+    link: "#",
   },
   {
     icon: <Settings className="w-10 h-10 text-blue-500" />,
     title: "IT Management",
     desc: "Reliable IT infrastructure and management services to keep your business running smoothly.",
-    link: "/services/it-management",
+    link: "#",
   },
   {
     icon: <AirVent className="w-10 h-10 text-blue-500" />,
     title: "AI & Automation",
     desc: "Cutting-edge AI-driven solutions and automation to scale efficiency and performance.",
-    link: "/services/ai-automation",
+    link: "#",
   },
   {
     icon: <ShieldCheck className="w-10 h-10 text-blue-500" />,
     title: "Data Security",
     desc: "Robust security solutions to safeguard your data and maintain compliance standards.",
-    link: "/services/data-security",
+    link: "#",
   },
   {
     icon: <Cloud className="w-10 h-10 text-blue-500" />,
     title: "Cloud Solutions",
     desc: "Scalable cloud services for flexibility, performance, and cost-efficiency.",
-    link: "/services/cloud",
+    link: "#",
   },
   {
     icon: <Cpu className="w-10 h-10 text-blue-500" />,
     title: "Consulting",
     desc: "Expert consulting to align technology with your business strategy effectively.",
-    link: "/services/consulting",
+    link: "#",
   },
 ];
 
@@ -344,49 +344,57 @@ const Home = () => {
 
       {/* ---------------------- Team Section ---------------------- */}
       <section className="bg-blue-50 py-20 px-6 md:px-16">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-12"
-          >
-            Meet Our Team
-          </motion.h2>
+  <div className="max-w-7xl mx-auto text-center">
+    <motion.h2
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+      className="text-3xl md:text-4xl font-bold text-gray-900 mb-12"
+    >
+      Meet Our Team
+    </motion.h2>
 
-          <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{
-                  y: -8,
-                  scale: 1.03,
-                  boxShadow: "0 15px 35px rgba(0,0,0,0.15)",
-                }}
-                onClick={() =>
-                  navigate(`/company/our-team`)
-                }
-                className="cursor-pointer bg-white border border-gray-200 rounded-lg shadow-md transition p-6 text-center"
-              >
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-24 h-24 rounded-full mx-auto mb-4 border-4 border-blue-500 object-cover"
-                />
-                <h3 className="text-lg font-semibold text-gray-800">
-                  {member.name}
-                </h3>
-                <p className="text-sm text-blue-600">{member.role}</p>
-                <p className="mt-3 text-gray-600 text-sm">{member.bio}</p>
-              </motion.div>
-            ))}
+    <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {team.map((member, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
+          onClick={() => navigate(`/company/our-team`)}
+          className="relative cursor-pointer rounded-2xl overflow-hidden p-1 bg-gradient-to-tr from-blue-400 via-indigo-500 to-purple-500 shadow-lg hover:shadow-2xl transition-all duration-300"
+        >
+          {/* Inner card with white background */}
+          <div className="bg-white rounded-2xl p-6 text-center h-full flex flex-col items-center">
+            <div className="relative w-28 h-28 mb-4">
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-28 h-28 rounded-full object-cover shadow-xl ring-4 ring-gradient from-blue-400 via-indigo-500 to-purple-500"
+              />
+            </div>
+            <h3 className="text-lg md:text-xl font-semibold text-gray-800">
+              {member.name}
+            </h3>
+            <p className="text-sm md:text-base text-blue-600 font-medium">
+              {member.role}
+            </p>
+            <p className="mt-2 text-gray-700 text-sm md:text-sm">
+              {member.bio}
+            </p>
           </div>
-        </div>
-      </section>
+
+          {/* Hover overlay */}
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-blue-400 via-indigo-500 to-purple-500 opacity-0 hover:opacity-10 transition-opacity duration-300"></div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* ---------------------- Contact Section ---------------------- */}
       <section className="bg-blue-600 py-20 px-6 md:px-16 text-white">
