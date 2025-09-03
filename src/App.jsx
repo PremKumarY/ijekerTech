@@ -25,6 +25,7 @@ import Profile from './components/cms/account/Profile'
 import Settings from './components/cms/account/Settings'
 import CoursesLandingPage from './components/cms/courses/CoursesLandingPage'
 import Register from './components/cms/Register'
+import ConnectCard from './components/ConnectCard'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="connect" element={<ConnectCard />} />
             <Route path="blog/BlogPage" element={<BlogList />} />
             <Route path="pages/testimonials" element={<Testimonials />} />
             <Route path="itsolutions/WebDevelopment" element={<WebDevelopment />} />

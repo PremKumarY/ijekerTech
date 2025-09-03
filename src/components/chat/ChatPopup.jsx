@@ -8,7 +8,12 @@ const LEAD_URL =
   (import.meta.env?.VITE_BACKEND_URL || "https://chatbot-api-7hjs.onrender.com") +
   "/api/leads";
 
-
+// Welcome messages with delay
+const WELCOME_MESSAGES = [
+  { text: "Hi! 👋 Welcome to ijekerTech.", delay: 1000 },
+  { text: "I am your assistant, here to help you.", delay: 1000 },
+  { text: "Please provide your email or phone so we can assist you better.", delay: 1000 }
+];
 
 function ChatPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,13 +26,14 @@ function ChatPopup() {
   const [suggestions, setSuggestions] = useState([
     "about ijekerTech",
     "ijekerTech services",
-    "courses ",
+    "courses",
     "what can this chatbot answer?"
   ]);
 
   const [awaitingLead, setAwaitingLead] = useState(false);
   const [leadValue, setLeadValue] = useState("");
   const [leadValid, setLeadValid] = useState(null);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const endRef = useRef(null);
   const inputRef = useRef(null);
@@ -39,16 +45,25 @@ function ChatPopup() {
 
   const abortControllerRef = useRef(null);
 
+  // Tooltip show/hide continuously
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowTooltip(prev => !prev);
+    }, 1500); // 1.5s me toggle
+
+    return () => clearInterval(interval);
+  }, []);
+
+
   useEffect(() => endRef.current?.scrollIntoView({ behavior: "smooth" }), [messages, typing]);
 
-  // Draggable
+  // Draggable handlers
   const handleMouseDown = (e) => {
     isDragging.current = true;
     offset.current = { x: e.clientX, y: e.clientY };
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
   };
-
   const handleMouseMove = (e) => {
     if (!isDragging.current) return;
     const dx = offset.current.x - e.clientX;
@@ -59,27 +74,35 @@ function ChatPopup() {
       right: Math.max(prev.right + dx, 0),
     }));
   };
-
   const handleMouseUp = () => {
     isDragging.current = false;
     document.removeEventListener("mousemove", handleMouseMove);
     document.removeEventListener("mouseup", handleMouseUp);
   };
 
+  // OPEN CHAT WITH STAGGERED MESSAGES
   const openChat = () => {
     setIsOpen(true);
     setUnread(0);
     setError("");
-    setMessages([
-      {
-        id: crypto.randomUUID(),
-        from: "bot",
-        text: "Hello Sir! Welcome to ijekerTech! 🎉 Please provide your email or phone so we can assist you better.",
-        createdAt: new Date().toISOString(),
-      },
-    ]);
-    setAwaitingLead(true);
+    setMessages([]);
+    setAwaitingLead(false);
     setTimeout(() => inputRef.current?.focus(), 100);
+
+    // Sequentially show messages
+    WELCOME_MESSAGES.reduce((promise, msg) => {
+      return promise.then(() => new Promise(res => {
+        setTimeout(() => {
+          setMessages(prev => [
+            ...prev,
+            { id: crypto.randomUUID(), from: "bot", text: msg.text, createdAt: new Date().toISOString() }
+          ]);
+          res();
+        }, msg.delay);
+      }));
+    }, Promise.resolve()).then(() => {
+      setAwaitingLead(true);
+    });
   };
 
   const closeChat = () => {
@@ -105,12 +128,10 @@ function ChatPopup() {
     const phoneRegex = /^[0-9]{7,15}$/;
     return emailRegex.test(val) || phoneRegex.test(val);
   };
-
   const onLeadChange = (val) => {
     setLeadValue(val);
     setLeadValid(val === "" ? null : validateLead(val));
   };
-
   const submitLead = async () => {
     if (!validateLead(leadValue)) {
       setError("❌ Enter a valid email or phone.");
@@ -128,16 +149,15 @@ function ChatPopup() {
         body: JSON.stringify({ contact: leadValue })
       });
 
-      setMessages(prev => [...prev, { id: crypto.randomUUID(), from: "bot", text: "✅ Thanks! Your details are saved. How can I help you today?", createdAt: new Date().toISOString() }]);
+      setMessages(prev => [...prev, { id: crypto.randomUUID(), from: "bot", text: "✅ Thanks! Your details are saved.", createdAt: new Date().toISOString() }]);
     } catch (err) { console.error("Lead save failed:", err); }
   };
 
-  // Handle sending messages with **realistic typing effect**
+  // Send messages
   const handleSend = async (presetText) => {
     const text = (presetText ?? input).trim();
     if (!text || busy) return;
 
-    // Cancel previous request if any
     abortControllerRef.current?.abort();
     const controller = new AbortController();
     abortControllerRef.current = controller;
@@ -156,25 +176,22 @@ function ChatPopup() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: leadValue,  // ✅ include user’s email/phone
+          email: leadValue,
           from: "user",
           text
         }),
-
         signal: controller.signal,
       });
       if (!res.ok) throw new Error(`Server ${res.status}`);
       const data = await res.json();
 
       if (data?.botMsg) {
-        // Create empty bot message
         const botMsg = { id: crypto.randomUUID(), from: "bot", text: "", createdAt: new Date().toISOString() };
         setMessages(prev => [...prev, botMsg]);
 
-        // Typing effect: add characters one by one
         const fullText = data.botMsg.text;
         let i = 0;
-        const speed = Math.min(50, 2000 / fullText.length); // dynamic typing speed
+        const speed = Math.min(50, 2000 / fullText.length);
         const interval = setInterval(() => {
           i++;
           setMessages(prev => prev.map(m => m.id === botMsg.id ? { ...m, text: fullText.slice(0, i) } : m));
@@ -182,7 +199,7 @@ function ChatPopup() {
         }, speed);
       }
 
-      setSuggestions(data?.suggestions?.length ? data.suggestions : ["about ijekerTech","ijekerTech services","courses","what can this chatbot answer?"]);
+      setSuggestions(data?.suggestions?.length ? data.suggestions : ["about ijekerTech", "ijekerTech services", "courses", "what can this chatbot answer?"]);
 
     } catch (err) {
       if (err.name !== "AbortError") setError("⚠️ Connection issue. Try again later.");
@@ -194,7 +211,6 @@ function ChatPopup() {
   };
 
   const canSend = useMemo(() => input.trim().length > 0 && !busy, [input, busy]);
-
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -213,6 +229,7 @@ function ChatPopup() {
     >
       {isOpen ? (
         <div className={panelClass}>
+          {/* CHAT PANEL */}
           <div className="flex items-center justify-between px-5 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-3xl shadow-md">
             <h2 className="text-sm font-semibold flex items-center gap-2">
               <span className="h-2 w-2 rounded-full bg-green-300 animate-pulse" /> ijekerTech Assistant
@@ -267,16 +284,27 @@ function ChatPopup() {
           )}
         </div>
       ) : (
-        <button onClick={openChat} className="relative bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 animate-bounce transition-all">
+        <button
+          onClick={openChat}
+          className="relative bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-red-700 animate-bounce transition-all"
+        >
           <MessageCircle size={26} />
           {unread > 0 && <span className="absolute -top-1 -right-1 h-5 min-w-5 px-1 rounded-full bg-red-500 text-[10px] font-bold grid place-items-center animate-ping">{unread}</span>}
+
+          {/* Tooltip */}
+          <span className={`absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-1 rounded-md bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-xs md:text-sm transition-all duration-300 whitespace-nowrap flex items-center gap-1
+  ${showTooltip ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2"}`}>
+            Click to Chat....
+          </span>
+
+
         </button>
       )}
     </div>
   );
 }
 
-// Bubble
+// Bubble component
 function Bubble({ msg }) {
   const isUser = msg.from === "user";
   const time = new Date(msg.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -296,15 +324,14 @@ function Avatar({ who }) {
 
 function TypingIndicator() {
   return (
-   <div className="flex items-center gap-2 animate-fadeIn">
-  <Avatar who="bot" />
-  <div className="flex gap-1 px-3 py-2 rounded-2xl bg-gray-100 shadow-inner">
-    <span className="w-2 h-2 bg-gray-500 rounded-full animate-typing-bounce [animation-delay:0ms]"></span>
-    <span className="w-2 h-2 bg-gray-500 rounded-full animate-typing-bounce [animation-delay:200ms]"></span>
-    <span className="w-2 h-2 bg-gray-500 rounded-full animate-typing-bounce [animation-delay:400ms]"></span>
-  </div>
-</div>
-
+    <div className="flex items-center gap-2 animate-fadeIn">
+      <Avatar who="bot" />
+      <div className="flex gap-1 px-3 py-2 rounded-2xl bg-gray-100 shadow-inner">
+        <span className="w-2 h-2 bg-gray-500 rounded-full animate-typing-bounce [animation-delay:0ms]"></span>
+        <span className="w-2 h-2 bg-gray-500 rounded-full animate-typing-bounce [animation-delay:200ms]"></span>
+        <span className="w-2 h-2 bg-gray-500 rounded-full animate-typing-bounce [animation-delay:400ms]"></span>
+      </div>
+    </div>
   );
 }
 
