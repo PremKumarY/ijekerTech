@@ -46,7 +46,7 @@ function NavbarBanner() {
             <FaMapMarkerAlt className="text-blue-600 ml-2" />
             <div>
               <span className="text-gray-500">Our Address:</span>{" "}
-              <span className="font-semibold">Kushinagar, Uttar Pradesh</span>
+              <span className="font-semibold">Kushinagar-Main Branch,AND Lucknow-2-Branch</span>
             </div>
           </div>
         </div>
