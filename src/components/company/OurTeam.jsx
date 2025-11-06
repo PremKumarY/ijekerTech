@@ -45,6 +45,15 @@ function OurTeam() {
       instagram: "https://www.instagram.com/dhananjay_kush07/",
       twitter: "https://x.com/Dk_Dhananjay2",
     },
+    {
+      name: "Ashish Yadav",
+      role: "Intern",
+      bio: "Enthusiastic intern passionate about human resources. Eager to support HR initiatives, learn from the team, and contribute to a positive workplace culture.",
+      image: "/man.png",
+      linkedin: "https://www.linkedin.com",
+      instagram: "https://www.instagram.com",
+      twitter: "https://x.com",
+    },
   ];
 
   const coreValues = [
