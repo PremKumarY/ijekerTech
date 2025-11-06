@@ -46,7 +46,7 @@ function OurTeam() {
       twitter: "https://x.com/Dk_Dhananjay2",
     },
     {
-      name: "Ashish Yadav",
+      name: "Ashish Kumar Yadav",
       role: "Intern",
       bio: "Enthusiastic intern passionate about human resources. Eager to support HR initiatives, learn from the team, and contribute to a positive workplace culture.",
       image: "/man.png",
