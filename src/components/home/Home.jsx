@@ -41,7 +41,7 @@ const slides = [
     image: "/head.jpg",
     title: "Best Solution To Run Your Project Faster",
     description:
-      "Grursus suada faci Lorem ipsum dolarorit ametion consectetur elit. Vesti at bulum nec odio aea the dumm ipsumm and fadolorit to the consectetur dummy text elit.",
+      "We provide innovative IT solutions designed to accelerate your business growth. Our team helps you streamline operations and achieve your project goals faster.",
     buttonText: "Get Details",
     buttonLink: "/company/about",
   },
@@ -202,7 +202,7 @@ const Home = () => {
               <motion.div key={index} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }} onClick={() => navigate(`/company/our-team`)} className="relative cursor-pointer rounded-2xl overflow-hidden p-1 bg-gradient-to-tr from-blue-400 via-indigo-500 to-purple-500 shadow-lg hover:shadow-2xl transition-all duration-300">
                 <div className="bg-white rounded-2xl p-6 text-center h-full flex flex-col items-center">
                   <div className="relative w-28 h-28 mb-4">
-                    <img src={member.image} alt={member.name} className="w-28 h-28 rounded-full object-cover shadow-xl ring-4 ring-gradient from-blue-400 via-indigo-500 to-purple-500" />
+                    <img src={member.image} alt={member.name} className="w-28 h-28 rounded-full object-cover shadow-xl ring-4 ring-blue-400" />
                   </div>
                   <h3 className="text-lg md:text-xl font-semibold text-gray-800">{member.name}</h3>
                   <p className="text-sm md:text-base text-blue-600 font-medium">{member.role}</p>
